@@ -2,16 +2,13 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import application.Main;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -73,7 +70,6 @@ public class FieldController implements Initializable{
 				gemma.move();
 				g.setLayoutY(gemma.getPosy());
 				g.setLayoutX(gemma.getPosx());
-				
 				
 			}),new KeyFrame(Duration.millis(30)));
 			

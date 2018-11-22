@@ -41,7 +41,6 @@ public class MenuController implements Initializable{
 		if(result.isPresent()) {
 			try {
 				String nickName = result.get();
-				System.out.println(nickName);
 				Main.getIndexModel().registrerUser(nickName);
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource("/application/IndexWindow.fxml"));

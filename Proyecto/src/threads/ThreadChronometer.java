@@ -18,7 +18,6 @@ public class ThreadChronometer extends Thread{
 	public void run() {
 		while (true) {		
 			field.getChronometer().initiate();
-			System.out.println(field.getChronometer().getTime());
 			String time = field.getChronometer().getTime();
 			text.setText(time);
 			try {

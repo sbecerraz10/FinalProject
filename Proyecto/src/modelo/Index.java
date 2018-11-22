@@ -67,6 +67,7 @@ public class Index {
 		return users;
 	}
 	
+	
 	public String writeUsers() {
 		String cadena = "";
 		for(int i = 0;i<users.size();i++) {

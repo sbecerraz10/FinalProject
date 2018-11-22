@@ -1,0 +1,5 @@
+Chernobyl;/images/chernobyl.jpg
+Ciudad-en-llamas;/images/llamas.jpg
+Ciudad-en-ruinas;/images/ruinas.jpg
+Wakanda;/images/panosfera.png
+Viajestic;/images/viajestic.jpg

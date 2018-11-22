@@ -1,0 +1,10 @@
+500;250;Thor;/images/thor.png
+500;250;Spiderman;/images/spiderman1.png
+500;250;Iroman;/images/ironman.png
+500;250;Capitan-America;/images/capitanAmerica.png
+500;250;Hulk;/images/hulk.png
+500;250;Rocket;/images/rocket.png
+500;250;Gamora;/images/gamora.png
+500;250;Drax;/images/drax.png
+500;250;Ant-Man;/images/ant_man.png
+500;250;Falcon;/images/falcon.png

@@ -29,6 +29,8 @@ public class Index {
 	
 	private Field fieldChoose;
 	
+	private User userChoose;
+	
 	
 	public Index() {
 		File file = new File("data/Coachs.txt");
@@ -45,15 +47,10 @@ public class Index {
 		fieldChoose = headField;
 	}
 	
-	
-	
-	
-	
-	
 	public void registrerUser(String nickname) throws NicknameNotValid {
 		if(nickname.length()<4) {
 			throw new NicknameNotValid();
-		}users.add(new User(nickname));		
+		}users.add(new User(nickname,0));		
 	}
 	
 	public ArrayList<User> ordenarUserName() {	
@@ -70,6 +67,13 @@ public class Index {
 		return users;
 	}
 	
+	public String writeUsers() {
+		String cadena = "";
+		for(int i = 0;i<users.size();i++) {
+			cadena += users.get(i).getName()+"\t"+users.get(i).getScore()+",";
+		}
+		return cadena;
+    }
 	
 	public void loadCharacters() {
 		try {
@@ -339,9 +343,10 @@ public class Index {
 	public void setHeadCharacter(Character headCharacter) {
 		this.headCharacter = headCharacter;
 	}
-	
-	
 
+	public void choosenUser(String message) {
+		userChoose = new User(message,0);		
+	}
 }
 
 

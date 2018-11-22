@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Main;
 import exception.NicknameNotValid;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,22 +36,22 @@ public class SearchController implements Initializable{
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		try {
-			index.registrerUser("Sierra");
-		} catch (NicknameNotValid e) {
-			e.printStackTrace();
+		String[] coachs = Main.getIndexModel().writeUsers().split(",");
+		for(int i = 0; i<coachs.length;i++) {
+			ListView.getItems().add(coachs[i]);
 		}
-		
-		for(int i = 0 ; i<index.getUsers().size();i++) {
-    		ListView.getItems().add(index.getUsers().get(i).getName()+"-   Puntaje:  ("+index.getUsers().get(i).getScore()+")");
-    		}
-		
 	}
 	
 	@FXML
 	public void select(ActionEvent event) {
 		try {
+			String message = "";
+			ObservableList<String> user;
+			user = ListView.getSelectionModel().getSelectedItems();
+			for(String m : user) {
+				message = m;
+			}
+			Main.getIndexModel().choosenUser(message);
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/application/IndexWindow.fxml"));
 			Parent root = loader.load();

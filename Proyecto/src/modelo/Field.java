@@ -17,13 +17,16 @@ public class Field implements Comparable<Field>{
 	private ArrayList<Bomb> bombs;
 	
 	private ArrayList<Electricity> electricity;
+	
+	private Chronometer chronometer;
 
 	public Field(String name,String image) {
 		this.name = name;
 		this.image = image;
 		bombs = new ArrayList<Bomb>();
 		electricity = new ArrayList<Electricity>();
-		rootGemma = new Gemma(0); 
+		rootGemma = new Gemma(0);
+		chronometer = new Chronometer();
 	}
 	
 	public String getName() {
@@ -82,6 +85,14 @@ public class Field implements Comparable<Field>{
 		this.image = image;
 	}
 	
+	public Chronometer getChronometer() {
+		return chronometer;
+	}
+
+	public void setChronometer(Chronometer chronometer) {
+		this.chronometer = chronometer;
+	}
+
 	public void generateTraps() {
 		
 	}

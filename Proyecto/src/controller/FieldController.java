@@ -11,10 +11,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import modelo.Gemma;
+import threads.ThreadChronometer;
 
 public class FieldController implements Initializable{
 	//
@@ -48,9 +51,13 @@ public class FieldController implements Initializable{
     
     @FXML
     private ImageView g;
+    
+    @FXML
+    private Text chronometer;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		chronometer();
 		field.setImage(new Image(Main.getIndexModel().getFieldChoose().getImage()));
 		gema1.setOpacity(0.50);
 		gema2.setOpacity(0.50);
@@ -159,6 +166,11 @@ public class FieldController implements Initializable{
 	
 	public void disableDown() {
 		Main.getIndexModel().getCharacterChoose().setDown(false);
+	}
+	
+	public void chronometer() {
+		ThreadChronometer ch = new ThreadChronometer(Main.getIndexModel().getFieldChoose(),chronometer);
+		ch.start();
 	}
 	
 }

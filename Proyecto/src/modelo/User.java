@@ -23,9 +23,9 @@ public class User implements Comparable<User>, Serializable{
 		this.score = score;
 	}
 
-	public User(String name) {
+	public User(String name, int score) {
 		this.name = name;
-		score = 0;
+		this.score = score;
 	}
 
 	@Override

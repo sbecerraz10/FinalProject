@@ -23,6 +23,12 @@ import modelo.Trap;
 import threads.ThreadChronometer;
 
 public class FieldController implements Initializable{
+	
+	private ArrayList<Trap> traps;
+	
+	private ArrayList<ImageView> trapsImages;
+	
+	private ArrayList<ImageView> gemmaImages;
 	//
 	private Gemma gemma;
 	
@@ -65,7 +71,9 @@ public class FieldController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		chronometer();
+		traps = new ArrayList<>();
+		trapsImages = new ArrayList<>();
+		generateTraps();
 		field.setImage(new Image(Main.getIndexModel().getFieldChoose().getImage()));
 		gema1.setOpacity(0.50);
 		gema2.setOpacity(0.50);
@@ -87,7 +95,18 @@ public class FieldController implements Initializable{
 			thread.setCycleCount(Animation.INDEFINITE);
 			thread.play();
 			
-		generateTraps();
+		
+		trapsThread = new Timeline(new KeyFrame(Duration.ZERO, e-> {
+			
+			for(int i = 0; i<traps.size();i++) {
+				traps.get(i).move();
+				trapsImages.get(i).setLayoutX(traps.get(i).getX());
+				trapsImages.get(i).setLayoutY(traps.get(i).getY());
+			}
+		}),new KeyFrame(Duration.millis(30)));
+		
+		trapsThread.setCycleCount(Animation.INDEFINITE);
+		trapsThread.play();
 	}
 	
 	public void receiveScene(Scene scene) {
@@ -187,32 +206,38 @@ public class FieldController implements Initializable{
 	}
 	
 	private void generateTraps() {
-		ArrayList<Trap> traps = Main.getIndexModel().getFieldChoose().getTraps();
-//		
-//		for(int i=0;i<traps.size();i++) {
-//			if(traps.get(i) instanceof Bomb ) {
-//				Bomb temp = (Bomb) traps.get(i);
-//				ImageView bomb = new ImageView(new Image("/images/bomb.png"));
-//				pane.getChildren().add(bomb);
-//				bomb.setLayoutX(temp.getX());
-//				bomb.setLayoutY(temp.getY());
-//				trapsThread = new Timeline(new KeyFrame(Duration.ZERO, e-> {
-//					temp.move();
-//					bomb.setLayoutX(temp.getX());
-//					bomb.setLayoutY(temp.getY());
-//				}),new KeyFrame(Duration.millis(30)));
-//				
-//				trapsThread.setCycleCount(Animation.INDEFINITE);
-//				trapsThread.play();
-//			}
-//			if(traps.get(i) instanceof Electricity) {
-//				Electricity temp = (Electricity) traps.get(i);
-//				ImageView electricity = new ImageView(new Image("/images/bomb.png"));
-//				pane.getChildren().add(electricity);
-//				electricity.setLayoutX(temp.getX());
-//				electricity.setLayoutY(temp.getY());
-//			}			
-//		}
+		
+		URL bomb = getClass().getResource("/images/pene.png");
+    	Image bomba = new Image(bomb.toString(),50,50,false,true);
+    	
+    	URL elect = getClass().getResource("/images/pene.png");
+    	Image electri = new Image(elect.toString(),50,50,false,true);
+ 
+		traps = Main.getIndexModel().getFieldChoose().getTraps();
+		System.out.println(traps.size());
+		trapsImages = new ArrayList<>();
+		chronometer();
+		for(int i=0; i<traps.size();i++) {
+			trapsImages.add(new ImageView());
+			System.out.println("Entro");
+			if(traps.get(i) instanceof Bomb){
+				trapsImages.get(i).setImage(bomba);
+			}else {
+				trapsImages.get(i).setImage(electri);
+			}
+			
+		}
+		pane.getChildren().addAll(trapsImages);
+		
+	}
+	
+	private void generateGemmas() {
+		
+		Main.getIndexModel().getFieldChoose().addGemma(2);
+		Main.getIndexModel().getFieldChoose().addGemma(3);
+		Main.getIndexModel().getFieldChoose().addGemma(4);
+		Main.getIndexModel().getFieldChoose().addGemma(5);
+		Main.getIndexModel().getFieldChoose().addGemma(6);
 		
 	}
 	

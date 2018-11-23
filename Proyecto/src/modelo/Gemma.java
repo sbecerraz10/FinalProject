@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Gemma implements InterfaceMovement{
 
 	private Gemma left;
@@ -75,7 +77,36 @@ public class Gemma implements InterfaceMovement{
 	public void setPower(int power) {
 		this.power = power;
 	}
-
-
+	
+	
+    public void add(Gemma nueva){
+    	
+    	if(this.getPower()<nueva.getPower()) {
+    		if(rigth == null) {
+    			rigth = nueva;
+    		}else {
+    			rigth.add(nueva);
+    		}
+    	}else {
+    		if(left == null) {
+    			left = nueva;
+    		}else {
+    			left.add(nueva);
+    		}
+    	}
+        
+    }
+    
+    public void showInList(ArrayList<Gemma> list) {
+    	if( left != null ) {
+            left.showInList(list);
+    	}
+    	
+        list.add( this );
+        
+        if( rigth != null ) {
+            rigth.showInList(list);
+        }
+    }
 
 }

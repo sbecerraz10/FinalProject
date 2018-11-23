@@ -104,9 +104,10 @@ public class IndexController implements Initializable{
 			stage.setScene(scene);
 			stage.show();
 		}catch(IOException e) {
-			Alert a = new Alert(AlertType.ERROR);
-			a.setContentText(e.getMessage());
-			a.show();
+			e.printStackTrace();
+//			Alert a = new Alert(AlertType.ERROR);
+//			a.setContentText(e.getMessage());
+//			a.show();
 		} catch (FieldNotChoosen e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setContentText(e.getMessage());

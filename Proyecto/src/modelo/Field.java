@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Field class
@@ -36,9 +37,9 @@ public class Field implements Comparable<Field>{
 		this.name = name;
 		this.image = image;
 		traps = new ArrayList<Trap>();
-		rootGemma = new Gemma(0);
-		chronometer = new Chronometer();
 		generateTraps();
+		rootGemma = new Gemma(1);
+		chronometer = new Chronometer();
 	}
 	
 	public String getName() {
@@ -98,25 +99,24 @@ public class Field implements Comparable<Field>{
 	}
 
 	public void generateTraps() {
-		int numberOfBombs = 0;
-		numberOfBombs = (int)(Math.random()*10) + 4;
+		int numberOfBombs = (int)(Math.random()*7) + 2;
 		
 		for(int i=0; i<numberOfBombs; i++) {
 			int damage = (int)(Math.random() * 200 )+ 30;
-			int x = (int)( Math.random() * 500) + 10;
-			int y = (int)( Math.random() * -40) - 10;
+			int x = (int)( Math.random() * 500) + 3;
+			int y = (int)( Math.random() * -200) - 10;
 			int radius = (int) (Math.random() * 20) +1;
 			Bomb bomb = new Bomb(damage, x, y, radius);
 			traps.add(bomb);
 		}
 		
-		int numberOfElectricityTraps = 0;
-		numberOfElectricityTraps = (int)(Math.random()*10) + 4;
+		
+		int numberOfElectricityTraps = (int)(Math.random()*7) + 2 ;
 		
 		for(int i=0; i<numberOfElectricityTraps; i++) {
 			int damage = (int)(Math.random() * 200 )+ 30;
-			int x = (int)( Math.random() * 500) + 10;
-			int y = (int)( Math.random() * -40) - 10;
+			int x = (int)( Math.random() * 500) + 3;
+			int y = (int)( Math.random() * -200) - 10;
 			int numGemma = (int) (Math.random() * 3) +1;
 			Electricity electricity = new Electricity(damage, x, y, numGemma);
 			traps.add(electricity);
@@ -134,6 +134,19 @@ public class Field implements Comparable<Field>{
 		}
 		return toReturn;
 	}
+	
+	public void addGemma(int n){
+		Gemma nueva = new Gemma(n);
+		rootGemma.add(nueva);
+	}
+	
+	public ArrayList darListaContactos( ){
+		
+		ArrayList<Gemma> out = new ArrayList<>();
+        rootGemma.showInList(out);    
+            return out;  
+    }
+	
 //	public Field searchField(String id) {
 //		Field toReturn = null;
 //		if(this.image.equals(id)) {

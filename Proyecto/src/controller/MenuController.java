@@ -9,6 +9,7 @@ import application.Main;
 import exception.CharacterDoesNotExist;
 import exception.NicknameNotValid;
 import exception.PlayerDoesNotExist;
+import exception.playerAlreadyExists;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,6 +58,10 @@ public class MenuController implements Initializable{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (playerAlreadyExists e) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setContentText(e.getMessage());
+				a.show();
 			}
 			
 		}

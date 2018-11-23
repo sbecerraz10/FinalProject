@@ -18,6 +18,7 @@ import exception.CharacterNotChoosen;
 import exception.FieldNotChoosen;
 import exception.NicknameNotValid;
 import exception.PlayerDoesNotExist;
+import exception.playerAlreadyExists;
 
 /**
  * Index Class
@@ -65,11 +66,18 @@ public class Index {
 	 * Register an user to the collection of users
 	 * @param nickname , nickname of the user !=null
 	 * @throws NicknameNotValid throws it in case that it contains less of 4 characters.
+	 * @throws playerAlreadyExists 
 	 */
-	public void registrerUser(String nickname) throws NicknameNotValid {
+	public void registrerUser(String nickname) throws NicknameNotValid, playerAlreadyExists {
 		if(nickname.length()<4) {
 			throw new NicknameNotValid();
-		}users.add(new User(nickname,0));		
+		}
+		for(int i = 0; i<users.size();i++) {
+			if(users.get(i).getName().equalsIgnoreCase(nickname)) {
+				throw new playerAlreadyExists();
+			}
+		}
+		users.add(new User(nickname,0));		
 	}
 	
 	

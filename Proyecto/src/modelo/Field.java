@@ -38,7 +38,7 @@ public class Field implements Comparable<Field>{
 		this.image = image;
 		traps = new ArrayList<Trap>();
 		generateTraps();
-		generateGemma();
+		//generateGemma();
 		rootGemma = new Gemma(1);
 		chronometer = new Chronometer();
 	}
@@ -125,11 +125,11 @@ public class Field implements Comparable<Field>{
 		
 	}
 	
-	public void generateGemma() {
-		for(int i = 0; i<6 ;i++) {
-			Gemma g = new Gemma(i+1);
-		}
-	}
+//	public void generateGemma() {
+//		for(int i = 0; i<6 ;i++) {
+//			Gemma g = new Gemma(i+1);
+//		}
+//	}
 	
 	@Override
 	public int compareTo(Field field) {

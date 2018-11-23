@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -177,6 +178,12 @@ public class FieldController implements Initializable{
 	public void chronometer() {
 		ThreadChronometer ch = new ThreadChronometer(Main.getIndexModel().getFieldChoose(),chronometer);
 		ch.start();
+	}
+	
+	@FXML
+	private void saveGame() {
+		Main.getIndexModel().serializarUsers();
+		System.out.println("Mi mama me mima");
 	}
 	
 	private void generateTraps() {

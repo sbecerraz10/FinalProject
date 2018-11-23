@@ -36,9 +36,11 @@ public class SearchController implements Initializable{
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		String[] coachs = Main.getIndexModel().writeUsers().split(",");
-		for(int i = 0; i<coachs.length;i++) {
-			ListView.getItems().add(coachs[i]);
+		if(Main.getIndexModel().getUsers().size()!=0){
+			String[] coachs = Main.getIndexModel().writeUsers().split(",");
+			for(int i = 0; i<coachs.length;i++) {
+				ListView.getItems().add(coachs[i]);
+			}
 		}
 	}
 	

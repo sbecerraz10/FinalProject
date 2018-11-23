@@ -13,9 +13,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import exception.CharacterDoesNotExist;
 import exception.CharacterNotChoosen;
 import exception.FieldNotChoosen;
 import exception.NicknameNotValid;
+import exception.PlayerDoesNotExist;
 
 /**
  * Index Class
@@ -43,7 +45,7 @@ public class Index {
 	 *Index Constructor
 	 */
 	public Index() {
-		File file = new File("data/Coachs.txt");
+		File file = new File("files/Users.dat");
 		if(file.exists() == false) {
 			users = new ArrayList<User>();
 		}else {
@@ -335,7 +337,7 @@ public class Index {
 	 */
 	public void serializarUsers()  {
 		try {
-			File file = new File("files/Users.txt");
+			File file = new File("files/Users.dat");
 			if(file.exists()== false) {
 				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 				oos.writeObject(users);
@@ -365,7 +367,7 @@ public class Index {
 	public ArrayList<User> recuperarUsers() {
 		ArrayList<User> clon = null;
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data/Coachs.txt"));
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("files/Users.dat"));
 			clon = (ArrayList<User>) ois.readObject();
 			ois.close();
 		} catch (Exception e) {
@@ -432,15 +434,55 @@ public class Index {
 	public void setFieldChoose(Field fieldChoose) {
 		this.fieldChoose = fieldChoose;
 	}
-
+	
+	public void noCircular(){
+		headCharacter.getPrevious().setNext(null);
+		headCharacter.setPrevious(null);
+	}
+	
+	public Character searchCharacter(String nombre) throws CharacterDoesNotExist {
+		noCircular();
+		Character ch = null;
+		if(headCharacter != null) {
+			ch = headCharacter.searchCharacter(nombre);
+		}else{
+			ch = null;
+		}
+		circularListCharacter();
+		if(ch == null) {
+			throw new CharacterDoesNotExist();
+		}
+		return ch;
+	}
 	
 	/**
 	 * 
 	 * @param criterio
 	 * @return
 	 */
-	public User serachUser(String criterio) { 
-		return users.get(0);
+	public User searchUser(String nombre) throws PlayerDoesNotExist {
+		ordenarUserName();
+		User user = null;
+		boolean encontro = false;
+		int inicio = 0;
+		int ultimo = users.size()-1;
+		int centro;
+		while(inicio<=ultimo && !encontro) {
+			centro = (inicio+ultimo)/2;
+			if(users.get(centro).getName().compareToIgnoreCase(nombre)==0) {
+				user = users.get(centro);
+				encontro = true;
+			}else if(users.get(centro).getName().compareToIgnoreCase(nombre)<0) {
+				inicio = centro+1;
+			}else {
+				ultimo = centro-1;
+			}
+		}
+		if(user == null) {
+			throw new PlayerDoesNotExist();
+		}
+		
+		return user;
 	}
 	
 	/**

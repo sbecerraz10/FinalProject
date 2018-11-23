@@ -6,7 +6,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.Main;
+import exception.CharacterDoesNotExist;
 import exception.NicknameNotValid;
+import exception.PlayerDoesNotExist;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -94,12 +96,21 @@ public class MenuController implements Initializable{
 	
 	
 	@FXML
-	public void searchPlayer(ActionEvent event) {
+	public void searchPlayer() {
 		TextInputDialog dialog = new TextInputDialog();
-		dialog.setContentText("Ingrese el puntaje del usuario que sea buscar: ");
+		dialog.setContentText("Ingrese el nombre del usuario que sea buscar: ");
 		Optional<String> result = dialog.showAndWait();
 		if(result.isPresent()){
 			String criterio = result.get();
+			try {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setContentText(Main.getIndexModel().searchUser(criterio).toString());
+				alert.show();
+			} catch (PlayerDoesNotExist e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText(e.getMessage());
+				alert.show();
+			}
 		}
 	}
 		
@@ -110,6 +121,15 @@ public class MenuController implements Initializable{
 			Optional<String> result = dialog.showAndWait();
 			if(result.isPresent()) {
 				String criterio = result.get();
+				try {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setContentText(Main.getIndexModel().searchCharacter(criterio).toString());
+					alert.show();
+				} catch (CharacterDoesNotExist e) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText(e.getMessage());
+					alert.show();
+				}
 			}
 		}
 

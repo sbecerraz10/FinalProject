@@ -226,15 +226,21 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 	 * @param id
 	 * @return
 	 */
-	public Character searchCharacter(String id) {
+	public Character searchCharacter(String nombre) {
 		Character toReturn = null;
-		if(this.image.equals(id)) {
+		if(next == null) {
+			return null;
+		}
+		else if(this.nickname.equalsIgnoreCase(nombre)) {
 			toReturn =  this;
 		}else {
-			toReturn = this.next.searchCharacter(id);
+			toReturn = this.next.searchCharacter(nombre);
 		}
 		return toReturn;
 	}
 	
-
+	@Override
+	public String toString() {
+		return "Character [life=" + life + ", power=" + power + ", nickname=" + nickname + "]";
+	}
 }

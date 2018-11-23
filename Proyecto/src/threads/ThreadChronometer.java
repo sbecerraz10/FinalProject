@@ -1,6 +1,5 @@
 package threads;
 
-import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import modelo.Field;
 

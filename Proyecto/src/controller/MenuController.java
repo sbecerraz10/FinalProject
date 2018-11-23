@@ -23,10 +23,8 @@ import javafx.stage.Stage;
 
 public class MenuController implements Initializable{
 	
-	
 	//In case you need indexModel, call it using Main.getIndexModel()
 	
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

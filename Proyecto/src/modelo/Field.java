@@ -2,8 +2,16 @@ package modelo;
 
 import java.util.ArrayList;
 
+/**
+ * Field class
+ * @author Sebastian Becerra, Cristian Sierra, Juan Camilo Vargas
+ * @version Nov-23-2018
+ */
+
 public class Field implements Comparable<Field>{
 	
+	
+	//Atributos
 	private String name;
 	
 	private Field next;
@@ -20,6 +28,12 @@ public class Field implements Comparable<Field>{
 	
 	private Chronometer chronometer;
 
+	
+	/**
+	 * Field Constructor
+	 * @param name : name of the field
+	 * @param image: route of the image 
+	 */
 	public Field(String name,String image) {
 		this.name = name;
 		this.image = image;

@@ -1,7 +1,13 @@
 package modelo;
 
+
+/**
+ * Character class
+ * @author Sebastian Becerra, Juan Camilo Vargas, Cristian Sierra
+ *  @version Nov-23-2018
+ */
 public class Character implements Comparable<Character>, InterfaceMovement {
-	//
+	//Atributos
 	private int life;
 	
 	private int power;
@@ -26,26 +32,14 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 	private boolean up; 
 	private boolean down; 
 	
-	public boolean isUp() {
-		return up;
-	}
 
-
-	public void setUp(boolean up) {
-		this.up = up;
-	}
-
-
-	public boolean isDown() {
-		return down;
-	}
-
-
-	public void setDown(boolean down) {
-		this.down = down;
-	}
-
-
+	/**
+	 * Character Constructor
+	 * @param life:life of the character
+	 * @param power: power of the character
+	 * @param nickname: nickname of the character
+	 * @param image: route of the image of the character
+	 */
 	public Character(int life,int power, String nickname, String image) {
 		super();
 		this.life = life;
@@ -58,6 +52,29 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 		this.posx = 346;
 	}
 
+	public boolean isUp() {
+		return up;
+	}
+	
+	
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+	
+	
+	public boolean isDown() {
+		return down;
+	}
+	
+	
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+	
+	/**
+	 * Method move
+	 * It is responsible for the movement of the character
+	 */
 	@Override
 	public void move() {
 		if(this.left) {
@@ -177,6 +194,8 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 		this.power = power;
 	}
 
+	
+	
 	@Override
 	public int compareTo(Character character2) {
 		int toReturn = 0;

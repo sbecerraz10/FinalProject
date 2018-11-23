@@ -30,7 +30,7 @@ public class FieldController implements Initializable{
 	
 	private ArrayList<ImageView> gemmaImages;
 	//
-	private Gemma gemma;
+	private ArrayList<Gemma> gemma;
 	
 	private Timeline thread;
 	
@@ -64,16 +64,18 @@ public class FieldController implements Initializable{
     private ImageView character;
     
     @FXML
-    private ImageView g;
-    
-    @FXML
     private Text chronometer;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		traps = new ArrayList<>();
 		trapsImages = new ArrayList<>();
+		gemma = new ArrayList<>();
+		gemmaImages = new ArrayList<>();
+		generateGemmas();
+//		gemma = Main.getIndexModel().getFieldChoose().showList();
 		generateTraps();
+		
 		field.setImage(new Image(Main.getIndexModel().getFieldChoose().getImage()));
 		gema1.setOpacity(0.50);
 		gema2.setOpacity(0.50);
@@ -84,11 +86,18 @@ public class FieldController implements Initializable{
 		character.setImage(new Image(Main.getIndexModel().getCharacterChoose().getImage()));
 
 			thread = new Timeline(new KeyFrame(Duration.ZERO, e-> {
-				g.setImage(new Image("/images/Gema_Alma.png"));
-				gemma = Main.getIndexModel().getFieldChoose().getRootGemma();
-				gemma.move();
-				g.setLayoutY(gemma.getPosy());
-				g.setLayoutX(gemma.getPosx());
+//				g.setImage(new Image("/images/Gema_Alma.png"));
+//				gemma = Main.getIndexModel().getFieldChoose().getRootGemma();
+//				gemma.move();
+//				g.setLayoutY(gemma.getPosy());
+//				g.setLayoutX(gemma.getPosx());
+				
+				for(int i = 0; i<gemma.size();i++) {
+					gemma.get(i).move();
+					gemmaImages.get(i).setLayoutX(gemma.get(i).getPosx());
+					gemmaImages.get(i).setLayoutY(gemma.get(i).getPosy());
+				}
+				
 				
 			}),new KeyFrame(Duration.millis(30)));
 			
@@ -214,9 +223,6 @@ public class FieldController implements Initializable{
     	Image electri = new Image(elect.toString(),50,50,false,true);
  
 		traps = Main.getIndexModel().getFieldChoose().getTraps();
-		System.out.println(traps.size());
-		trapsImages = new ArrayList<>();
-		chronometer();
 		for(int i=0; i<traps.size();i++) {
 			trapsImages.add(new ImageView());
 			System.out.println("Entro");
@@ -233,12 +239,42 @@ public class FieldController implements Initializable{
 	
 	private void generateGemmas() {
 		
-		Main.getIndexModel().getFieldChoose().addGemma(2);
-		Main.getIndexModel().getFieldChoose().addGemma(3);
-		Main.getIndexModel().getFieldChoose().addGemma(4);
-		Main.getIndexModel().getFieldChoose().addGemma(5);
-		Main.getIndexModel().getFieldChoose().addGemma(6);
+		URL gg1 = getClass().getResource("/images/Gema_Alma.png");
+    	Image g1 = new Image(gg1.toString(),50,50,false,true);
+    	
+    	URL gg2 = getClass().getResource("/images/Gema_del_tiempo.png");
+    	Image g2 = new Image(gg2.toString(),50,50,false,true);
+    	
+    	URL gg3 = getClass().getResource("/images/Gema_Espacio.png");
+    	Image g3 = new Image(gg3.toString(),50,50,false,true);
+    	
+    	URL gg4 = getClass().getResource("/images/Gema_Mente.png");
+    	Image g4 = new Image(gg4.toString(),50,50,false,true);
+    	
+    	URL gg5 = getClass().getResource("/images/Gema_poder.png");
+    	Image g5 = new Image(gg5.toString(),50,50,false,true);
+    	
+    	URL gg6 = getClass().getResource("/images/Gema_Realidad.png");
+    	Image g6 = new Image(gg6.toString(),50,50,false,true);
 		
+		Main.getIndexModel().getFieldChoose().addGemma(6);
+		Main.getIndexModel().getFieldChoose().addGemma(2);
+		Main.getIndexModel().getFieldChoose().addGemma(5);
+		Main.getIndexModel().getFieldChoose().addGemma(4);
+		Main.getIndexModel().getFieldChoose().addGemma(3);
+		
+		gemma = Main.getIndexModel().getFieldChoose().showList();
+		for(int i = 0; i< gemma.size();i++) {
+			gemmaImages.add(new ImageView());
+		}
+		gemmaImages.get(0).setImage(g1);
+		gemmaImages.get(1).setImage(g2);
+		gemmaImages.get(2).setImage(g3);
+		gemmaImages.get(3).setImage(g4);
+		gemmaImages.get(4).setImage(g5);
+		gemmaImages.get(5).setImage(g6);
+		
+		pane.getChildren().addAll(gemmaImages);
 	}
 	
 }

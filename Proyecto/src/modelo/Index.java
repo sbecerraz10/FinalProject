@@ -272,9 +272,9 @@ public class Index {
 	 * @param actual: character that belongs to the circular list of characters 
 	 * @return: next character of actual character
 	 */
-	public Character showNextCharacter(Character actual) {
-		return actual.getNext();
-	}
+//	public Character showNextCharacter(Character actual) {
+//		return actual.getNext();
+//	}
 	
 	
 	/**

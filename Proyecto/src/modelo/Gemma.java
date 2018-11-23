@@ -18,7 +18,7 @@ public class Gemma implements InterfaceMovement{
 	@Override
 	public void move() {
 		if(this.posy > LIMITY) {
-			this.posy = 0;
+			this.posy = (int) (Math.random()*-200)-10;
 			int random = (int) (Math.random()*LIMITX)+5;
 			this.posx = random;
 		}
@@ -96,10 +96,7 @@ public class Gemma implements InterfaceMovement{
     	}
         
     }
-    
-    
-    
-    
+     
     public void showInList(ArrayList<Gemma> list) {
     	if( left != null ) {
             left.showInList(list);

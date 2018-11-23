@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import exception.CharacterNotChoosen;
 import exception.FieldNotChoosen;
 import exception.NicknameNotValid;
+import exception.playerAlreadyExists;
 import modelo.Index;
 import modelo.User;
 import modelo.Character;
@@ -27,7 +28,7 @@ class IndexTest {
 		index = new Index();
 	}
 	
-	private void escenario2() throws NicknameNotValid {
+	private void escenario2() throws NicknameNotValid, playerAlreadyExists {
 		escenario1();
 		index.registrerUser("sebb");
 		index.registrerUser("Ana");
@@ -54,6 +55,9 @@ class IndexTest {
 			assert(true);
 		} catch (NicknameNotValid e) {
 			fail("No esperaba excepcion");
+		} catch (playerAlreadyExists e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -67,6 +71,9 @@ class IndexTest {
 			fail("Se esperaba excepcion");
 		} catch (NicknameNotValid e) {
 			assert(true);
+		} catch (playerAlreadyExists e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

@@ -18,6 +18,7 @@ import exception.CharacterNotChoosen;
 import exception.FieldNotChoosen;
 import exception.NicknameNotValid;
 import exception.PlayerDoesNotExist;
+import exception.playerAlreadyExists;
 
 /**
  * Index Class
@@ -65,11 +66,18 @@ public class Index {
 	 * Register an user to the collection of users
 	 * @param nickname , nickname of the user !=null
 	 * @throws NicknameNotValid throws it in case that it contains less of 4 characters.
+	 * @throws playerAlreadyExists 
 	 */
-	public void registrerUser(String nickname) throws NicknameNotValid {
+	public void registrerUser(String nickname) throws NicknameNotValid, playerAlreadyExists {
 		if(nickname.length()<4) {
 			throw new NicknameNotValid();
-		}users.add(new User(nickname,0));		
+		}
+		for(int i = 0; i<users.size();i++) {
+			if(users.get(i).getName().equalsIgnoreCase(nickname)) {
+				throw new playerAlreadyExists();
+			}
+		}
+		users.add(new User(nickname,0));		
 	}
 	
 	
@@ -170,6 +178,7 @@ public class Index {
 			this.headField = field;
 		}else {
 			if(actual==null) {
+				field.setPrevious(previous);
 				previous.setNext(field);
 			}else {
 				if(this.headField.compareTo(field) <= 0) {
@@ -201,24 +210,31 @@ public class Index {
 	 * @param previous: previous character
 	 */
 	public void saveCharacters(Character character, Character actual, Character previous) {
+
 		if(this.headCharacter==null) {
 			this.headCharacter = character;
 		}else {
-			if(this.headCharacter.compareTo(character) <= 0) {
-				character.setNext(headCharacter);
-				headCharacter.setPrevious(character);
-				headCharacter = character;
-			}
-			else if(actual.compareTo(character) <= 0) {
-				if(previous!=null)previous.setNext(character);
-				actual.setPrevious(character);
-				character.setNext(actual);
+			if(actual==null) {
 				character.setPrevious(previous);
+				previous.setNext(character);
 			}else {
-				previous = actual;
-				actual = actual.getNext();
-				saveCharacters(character,actual,previous);
-			}
+				if(this.headCharacter.compareTo(character) <= 0) {
+					character.setNext(headCharacter);
+					headCharacter.setPrevious(character);
+					headCharacter = character;
+				}
+				else if(actual.compareTo(character) <= 0) {
+					if(previous!=null)previous.setNext(character);
+					actual.setPrevious(character);
+					character.setNext(actual);
+					character.setPrevious(previous);
+				}else {
+					previous = actual;
+					actual = actual.getNext();
+					saveCharacters(character,actual,previous);
+				}
+			}		
+					
 		}
 	}
 	/**

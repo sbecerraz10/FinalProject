@@ -10,6 +10,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -34,7 +35,8 @@ public class FieldController implements Initializable{
 	
 	private Timeline trapsThread;
 
-    @FXML
+ 
+	@FXML
     private ImageView field;
 
     @FXML

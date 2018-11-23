@@ -12,12 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import modelo.Bomb;
-import modelo.Electricity;
 import modelo.Gemma;
 import modelo.Trap;
 import threads.ThreadChronometer;
@@ -68,12 +66,12 @@ public class FieldController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		chronometer();
 		traps = new ArrayList<>();
 		trapsImages = new ArrayList<>();
 		gemma = new ArrayList<>();
 		gemmaImages = new ArrayList<>();
 		generateGemmas();
-//		gemma = Main.getIndexModel().getFieldChoose().showList();
 		generateTraps();
 		
 		field.setImage(new Image(Main.getIndexModel().getFieldChoose().getImage()));
@@ -86,16 +84,33 @@ public class FieldController implements Initializable{
 		character.setImage(new Image(Main.getIndexModel().getCharacterChoose().getImage()));
 
 			thread = new Timeline(new KeyFrame(Duration.ZERO, e-> {
-//				g.setImage(new Image("/images/Gema_Alma.png"));
-//				gemma = Main.getIndexModel().getFieldChoose().getRootGemma();
-//				gemma.move();
-//				g.setLayoutY(gemma.getPosy());
-//				g.setLayoutX(gemma.getPosx());
-				
+
 				for(int i = 0; i<gemma.size();i++) {
 					gemma.get(i).move();
 					gemmaImages.get(i).setLayoutX(gemma.get(i).getPosx());
 					gemmaImages.get(i).setLayoutY(gemma.get(i).getPosy());
+					if(Main.getIndexModel().getCharacterChoose().take((int)gemmaImages.get(i).getLayoutX(),(int) gemmaImages.get(i).getLayoutY())) {
+						gemmaImages.get(i).setVisible(false);
+						if(gemma.get(i).getPower() == 1) {
+							gema1.setOpacity(1);
+						}
+						if(gemma.get(i).getPower() == 2) {
+							gema2.setOpacity(1);
+						}
+						if(gemma.get(i).getPower() == 3) {
+							gema3.setOpacity(1);
+						}
+						if(gemma.get(i).getPower() == 4) {
+							gema4.setOpacity(1);
+						}
+						if(gemma.get(i).getPower() == 5) {
+							gema5.setOpacity(1);
+						}
+						if(gemma.get(i).getPower() == 6) {
+							gema6.setOpacity(1);
+						}
+						
+					}
 				}
 				
 				
@@ -111,6 +126,9 @@ public class FieldController implements Initializable{
 				traps.get(i).move();
 				trapsImages.get(i).setLayoutX(traps.get(i).getX());
 				trapsImages.get(i).setLayoutY(traps.get(i).getY());
+				if(Main.getIndexModel().getCharacterChoose().take((int)trapsImages.get(i).getLayoutX(),(int) trapsImages.get(i).getLayoutY())) {
+					trapsImages.get(i).setVisible(false);
+				}
 			}
 		}),new KeyFrame(Duration.millis(30)));
 		

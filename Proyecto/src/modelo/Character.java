@@ -77,23 +77,23 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 	 */
 	@Override
 	public void move() {
-		if(this.left) {
+		if(left) {
 			if(posx>0) {
 				this.posx -= MOVEMENT_RATING;				
 			}else {
 				this.posx = LIMITX;
 			}
-		}if(this.right) {
+		}if(right) {
 			if(posx<LIMITX) {
 				this.posx += MOVEMENT_RATING;
 			}else {
 				this.posx = 0;
 			}
-		}if(this.up) {
+		}if(up) {
 			if(posy>0) {
 				this.posy -= MOVEMENT_RATING;
 			}
-		}if(this.down) {
+		}if(down) {
 			if(posy+110<LIMITY) {
 				this.posy += MOVEMENT_RATING;
 			}
@@ -202,11 +202,10 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 	
 	}
 	
-	public boolean catchGema(int xG,int yG, int gH,int gW,int cH,int cW) {
+	public boolean take(int a,int b){
 		boolean cth = false;
-		if((this.posx+(cW/2))== (xG-(gW/2))||(this.posy+(cH/2))== (yG-(gH/2))){
-			cth = true;
-		}if((this.posx-(cW/2))== (xG+(gW/2))||(this.posy-(cH/2))== (yG+(gH/2))) {
+		
+		if(a<posx+100 && a>posx && b>posy && b<posy+110){
 			cth = true;
 		}
 		return cth;

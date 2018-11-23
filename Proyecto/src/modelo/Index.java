@@ -547,8 +547,12 @@ public class Index {
 	 * 
 	 * @param message
 	 */
-	public void choosenUser(String message) {
-		userChoose = new User(message,0);		
+	public void choosenUser(String data) {
+		String[] info = data.split("\t");
+		String name = info[0];
+		int score = Integer.parseInt(info[1]);
+		userChoose = new User(name,score);
+		System.out.println(userChoose.toString());
 	}
 }
 

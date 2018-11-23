@@ -198,15 +198,7 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 	
 	@Override
 	public int compareTo(Character character2) {
-		int toReturn = 0;
-		
-		if(this.power < character2.getPower() ) {
-			toReturn = -1;
-		}else if(this.power > character2.getPower()) {
-			toReturn = 1;
-		}
-		
-		return toReturn;
+		return this.getNickname().compareToIgnoreCase(character2.getNickname());
 	
 	}
 	

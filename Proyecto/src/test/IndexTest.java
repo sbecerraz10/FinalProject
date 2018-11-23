@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import exception.CharacterDoesNotExist;
 import exception.CharacterNotChoosen;
 import exception.FieldNotChoosen;
 import exception.NicknameNotValid;
-import exception.playerAlreadyExists;
+import exception.UserDoesNotExist;
+import exception.UserAlreadyExists;
 import modelo.Index;
 import modelo.User;
 import modelo.Character;
@@ -28,7 +30,7 @@ class IndexTest {
 		index = new Index();
 	}
 	
-	private void escenario2() throws NicknameNotValid, playerAlreadyExists {
+	private void escenario2() throws NicknameNotValid, UserAlreadyExists {
 		escenario1();
 		index.registrerUser("sebb");
 		index.registrerUser("Ana");
@@ -55,14 +57,28 @@ class IndexTest {
 			assert(true);
 		} catch (NicknameNotValid e) {
 			fail("No esperaba excepcion");
-		} catch (playerAlreadyExists e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (UserAlreadyExists e) {
+			fail("No se esperaba excepcion");
 		}
 	}
 	
 	@Test
-	void testRegistrerUserExcpetion() {
+	void testRegistrerUserAlreadyExistException() {
+		escenario1();
+		String newName = "Camilo";
+		
+		try {
+			index.registrerUser(newName);
+			fail("Se esperaba una excepcion");
+		} catch (NicknameNotValid e) {
+			fail("No esperaba esta excepcion");
+		} catch (UserAlreadyExists e) {
+			assert(true);
+		}
+	}
+	
+	@Test
+	void testRegistrerUserException() {
 		escenario1();
 		String newName = "Se";
 		
@@ -71,9 +87,8 @@ class IndexTest {
 			fail("Se esperaba excepcion");
 		} catch (NicknameNotValid e) {
 			assert(true);
-		} catch (playerAlreadyExists e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (UserAlreadyExists e) {
+			fail("No se esperaba esta excepcion");
 		}
 	}
 
@@ -87,6 +102,7 @@ class IndexTest {
 //		}
 //		assertEquals("Ana",index.ordenarUserName().get(0).getName());
 //		
+		fail("Not yet implemented");
 	}
 
 	@Test
@@ -104,14 +120,13 @@ class IndexTest {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	void testSaveField() {
-		fail("Not yet implemented");
-	}
 
 	@Test
-	void testSaveCharacters() {
-		fail("Not yet implemented");
+	void testSaveCharactersAtHead() {
+		escenario1();
+		Character character = new Character(0,0,"Zoo","/images/Zoo.png");
+		index.saveCharacters(character, index.getHeadCharacter(),null);
+		assertEquals(character,index.getHeadCharacter());
 	}
 
 	@Test
@@ -214,6 +229,85 @@ class IndexTest {
 			assert(true);
 		}						
 	}
+	
+	
+	@Test
+	void testSearchCharacterExistent() {
+		escenario1();
+		String name = "Thor";
+		try {
+			Character character = index.searchCharacter(name);
+			assertEquals(character.getNickname(),name);
+		} catch (CharacterDoesNotExist e) {
+			fail("No se esperaba excepcion");
+		}
+		
+	}
+	
+	@Test
+	void testSearchCharacterNotExistent() {
+		escenario1();
+		String name = "Tho";
+		try {
+			Character character = index.searchCharacter(name);
+			fail("No se esperaba excepcion");
+		} catch (CharacterDoesNotExist e) {
+			assert(true);
+		}
+	}
+	
+	@Test
+	void testSearchUserExistent() {
+		escenario1();
+		String nickName = "Camilo";
+		try {
+			User user = index.searchUser(nickName);
+			assertEquals(user.getName(),nickName);
+		} catch (UserDoesNotExist e) {
+			fail("No se esperaba excepcion");
+		}
+		
+	}
+	
+	
+	@Test
+	void testSearchUserNotExistent() {
+		escenario1();
+		String nickName = "C";
+		try {
+			User user = index.searchUser(nickName);
+			fail("Se esperaba excepcion");
+		} catch (UserDoesNotExist e) {
+			assert(true);
+		}
+	}
+	
+	@Test
+	void testSaveFieldAtHead() {
+		escenario1();
+		Field field = new Field("Zoo","/images/zoo.png");
+		index.saveField(field,index.getHeadField(),null);
+		assertEquals(field,index.getHeadField());
+	}
+	
+	@Test
+	void testSaveFieldAtMiddle() {
+		escenario1();
+		Field field = new Field("Loo","/images/loo.png");
+		index.saveField(field,index.getHeadField(),null);
+		//assertEquals(field,);
+		fail("Not yet implemented");
+	}
+	@Test
+	void testSaveFieldAtEnd() {
+		escenario1();
+		Field field = new Field("Loo","/images/loo.png");
+		index.saveField(field,index.getHeadField(),null);
+		//assertEquals(field,);
+		fail("Not yet implemented");
+	}
+	
+	
 
 	@Test
 	void testSerializarUsers() {

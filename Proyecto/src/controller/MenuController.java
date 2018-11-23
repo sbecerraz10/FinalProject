@@ -8,8 +8,8 @@ import java.util.ResourceBundle;
 import application.Main;
 import exception.CharacterDoesNotExist;
 import exception.NicknameNotValid;
-import exception.PlayerDoesNotExist;
-import exception.playerAlreadyExists;
+import exception.UserDoesNotExist;
+import exception.UserAlreadyExists;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +58,7 @@ public class MenuController implements Initializable{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (playerAlreadyExists e) {
+			} catch (UserAlreadyExists e) {
 				Alert a = new Alert(AlertType.ERROR);
 				a.setContentText(e.getMessage());
 				a.show();
@@ -111,7 +111,7 @@ public class MenuController implements Initializable{
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setContentText(Main.getIndexModel().searchUser(criterio).toString());
 				alert.show();
-			} catch (PlayerDoesNotExist e) {
+			} catch (UserDoesNotExist e) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setContentText(e.getMessage());
 				alert.show();

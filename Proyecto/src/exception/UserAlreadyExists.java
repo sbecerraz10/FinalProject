@@ -1,10 +1,10 @@
 package exception;
 
-public class playerAlreadyExists extends Exception{
+public class UserAlreadyExists extends Exception{
 	
 	public static final String  MESSAGE = "Ya existe un usuario con este nombre";
 	
-	public playerAlreadyExists(){
+	public UserAlreadyExists(){
 		super(MESSAGE);
 	}
 

@@ -1,10 +1,10 @@
 package exception;
 
-public class PlayerDoesNotExist extends Exception{
+public class UserDoesNotExist extends Exception{
 	
 	public static final String MESSAGE = "El jugador buscado no se encuentra registrado";
 
-	public PlayerDoesNotExist(){
+	public UserDoesNotExist(){
 		super(MESSAGE);
 	}
 }

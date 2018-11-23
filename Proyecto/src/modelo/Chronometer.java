@@ -14,6 +14,38 @@ public class Chronometer {
 		firstSecond=0;
 	}
 		
+	public int getSecondMinute() {
+		return secondMinute;
+	}
+
+	public void setSecondMinute(int secondMinute) {
+		this.secondMinute = secondMinute;
+	}
+
+	public int getFirstMinute() {
+		return firstMinute;
+	}
+
+	public void setFirstMinute(int firstMinute) {
+		this.firstMinute = firstMinute;
+	}
+
+	public int getSecondSeconnd() {
+		return secondSeconnd;
+	}
+
+	public void setSecondSeconnd(int secondSeconnd) {
+		this.secondSeconnd = secondSeconnd;
+	}
+
+	public int getFirstSecond() {
+		return firstSecond;
+	}
+
+	public void setFirstSecond(int firstSecond) {
+		this.firstSecond = firstSecond;
+	}
+
 	public String getTime() {
 		return secondMinute+""+firstMinute+":"+secondSeconnd+""+firstSecond;
 	}

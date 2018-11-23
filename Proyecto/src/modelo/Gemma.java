@@ -97,6 +97,9 @@ public class Gemma implements InterfaceMovement{
         
     }
     
+    
+    
+    
     public void showInList(ArrayList<Gemma> list) {
     	if( left != null ) {
             left.showInList(list);

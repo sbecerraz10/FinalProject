@@ -22,10 +22,8 @@ public class Field implements Comparable<Field>{
 	
 	private String image;
 	
-	private ArrayList<Bomb> bombs;
-	
-	private ArrayList<Electricity> electricity;
-	
+	private ArrayList<Trap> traps;
+		
 	private Chronometer chronometer;
 
 	
@@ -37,10 +35,10 @@ public class Field implements Comparable<Field>{
 	public Field(String name,String image) {
 		this.name = name;
 		this.image = image;
-		bombs = new ArrayList<Bomb>();
-		electricity = new ArrayList<Electricity>();
+		traps = new ArrayList<Trap>();
 		rootGemma = new Gemma(0);
 		chronometer = new Chronometer();
+		generateTraps();
 	}
 	
 	public String getName() {
@@ -75,22 +73,6 @@ public class Field implements Comparable<Field>{
 		this.rootGemma = rootGemma;
 	}
 
-	public ArrayList<Bomb> getBombs() {
-		return bombs;
-	}
-	
-	public ArrayList<Electricity> getElectricity() {
-		return electricity;
-	}
-
-	public void setBombs(ArrayList<Bomb> bombs) {
-		this.bombs = bombs;
-	}
-
-	public void setTraps(ArrayList<Electricity> electricity) {
-		this.electricity = electricity;
-	}
-
 	public String getImage() {
 		return image;
 	}
@@ -107,7 +89,38 @@ public class Field implements Comparable<Field>{
 		this.chronometer = chronometer;
 	}
 
+	public ArrayList<Trap> getTraps() {
+		return traps;
+	}
+
+	public void setTraps(ArrayList<Trap> traps) {
+		this.traps = traps;
+	}
+
 	public void generateTraps() {
+		int numberOfBombs = 0;
+		numberOfBombs = (int)(Math.random()*10) + 4;
+		
+		for(int i=0; i<numberOfBombs; i++) {
+			int damage = (int)(Math.random() * 200 )+ 30;
+			int x = (int)( Math.random() * 500) + 10;
+			int y = (int)( Math.random() * -40) - 10;
+			int radius = (int) (Math.random() * 20) +1;
+			Bomb bomb = new Bomb(damage, x, y, radius);
+			traps.add(bomb);
+		}
+		
+		int numberOfElectricityTraps = 0;
+		numberOfElectricityTraps = (int)(Math.random()*10) + 4;
+		
+		for(int i=0; i<numberOfElectricityTraps; i++) {
+			int damage = (int)(Math.random() * 200 )+ 30;
+			int x = (int)( Math.random() * 500) + 10;
+			int y = (int)( Math.random() * -40) - 10;
+			int numGemma = (int) (Math.random() * 3) +1;
+			Electricity electricity = new Electricity(damage, x, y, numGemma);
+			traps.add(electricity);
+		}
 		
 	}
 	

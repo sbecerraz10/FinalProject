@@ -10,6 +10,8 @@ public interface InterfaceMovement {
 	
 	public static final int MOVEMENT_RATING_GEMMA = 3;
 	
+	public static final int MOVEMENT_RATING_TRAP = 3;
+	
 	
 	
 	public void move();

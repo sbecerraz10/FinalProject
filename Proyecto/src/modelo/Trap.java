@@ -1,6 +1,6 @@
 package modelo;
 
-public class Trap {
+public class Trap implements InterfaceMovement{
 	
 	private int damage;
 	private int x;
@@ -34,6 +34,16 @@ public class Trap {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	@Override
+	public void move() {
+		if(this.y > LIMITY) {
+			this.y = (int) (Math.random() *-40 ) - 10;
+			this.x = (int)(Math.random() * LIMITX) + 5;
+		}
+		
+		this.y += MOVEMENT_RATING_TRAP;
 	}
 	
 }

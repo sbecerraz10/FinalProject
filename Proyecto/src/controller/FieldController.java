@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import application.Main;
 import javafx.animation.Animation;
@@ -11,9 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import modelo.Bomb;
+import modelo.Electricity;
 import modelo.Gemma;
+import modelo.Trap;
 import threads.ThreadChronometer;
 
 public class FieldController implements Initializable{
@@ -21,10 +26,15 @@ public class FieldController implements Initializable{
 	private Gemma gemma;
 	
 	private Timeline thread;
+	
+	private Timeline trapsThread;
 
     @FXML
     private ImageView field;
 
+    @FXML
+    private AnchorPane pane;
+    
     @FXML
     private ImageView gema1;
 
@@ -76,7 +86,7 @@ public class FieldController implements Initializable{
 			thread.setCycleCount(Animation.INDEFINITE);
 			thread.play();
 			
-		
+		generateTraps();
 	}
 	
 	public void receiveScene(Scene scene) {
@@ -167,6 +177,36 @@ public class FieldController implements Initializable{
 	public void chronometer() {
 		ThreadChronometer ch = new ThreadChronometer(Main.getIndexModel().getFieldChoose(),chronometer);
 		ch.start();
+	}
+	
+	private void generateTraps() {
+		ArrayList<Trap> traps = Main.getIndexModel().getFieldChoose().getTraps();
+//		
+//		for(int i=0;i<traps.size();i++) {
+//			if(traps.get(i) instanceof Bomb ) {
+//				Bomb temp = (Bomb) traps.get(i);
+//				ImageView bomb = new ImageView(new Image("/images/bomb.png"));
+//				pane.getChildren().add(bomb);
+//				bomb.setLayoutX(temp.getX());
+//				bomb.setLayoutY(temp.getY());
+//				trapsThread = new Timeline(new KeyFrame(Duration.ZERO, e-> {
+//					temp.move();
+//					bomb.setLayoutX(temp.getX());
+//					bomb.setLayoutY(temp.getY());
+//				}),new KeyFrame(Duration.millis(30)));
+//				
+//				trapsThread.setCycleCount(Animation.INDEFINITE);
+//				trapsThread.play();
+//			}
+//			if(traps.get(i) instanceof Electricity) {
+//				Electricity temp = (Electricity) traps.get(i);
+//				ImageView electricity = new ImageView(new Image("/images/bomb.png"));
+//				pane.getChildren().add(electricity);
+//				electricity.setLayoutX(temp.getX());
+//				electricity.setLayoutY(temp.getY());
+//			}			
+//		}
+		
 	}
 	
 }

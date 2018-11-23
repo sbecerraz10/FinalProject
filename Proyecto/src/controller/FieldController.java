@@ -234,10 +234,10 @@ public class FieldController implements Initializable{
 	
 	private void generateTraps() {
 		
-		URL bomb = getClass().getResource("/images/pene.png");
+		URL bomb = getClass().getResource("/images/bomb.png");
     	Image bomba = new Image(bomb.toString(),50,50,false,true);
     	
-    	URL elect = getClass().getResource("/images/pene.png");
+    	URL elect = getClass().getResource("/images/electricityTrap.png");
     	Image electri = new Image(elect.toString(),50,50,false,true);
  
 		traps = Main.getIndexModel().getFieldChoose().getTraps();

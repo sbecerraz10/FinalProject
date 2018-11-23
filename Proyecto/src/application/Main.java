@@ -15,7 +15,7 @@ public class Main extends Application {
 	//All controllers are going to call it using Main.getIndexModel()
 	private static Index indexModel;
 	//
-	
+	//
 	@Override
 	public void start(Stage primaryStage) {
 		try {

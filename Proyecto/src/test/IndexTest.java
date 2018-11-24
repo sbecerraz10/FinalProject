@@ -358,13 +358,13 @@ class IndexTest {
 	
 	
 
-	@Test
-	void testSerializarUsers() {
-		escenario1();
-		index.serializarUsers();
-		//If the method does not throw exception
-		assert(true);
-	}
+//	@Test
+//	void testSerializarUsers() {
+//		escenario1();
+//		index.serializarUsers();
+//		//If the method does not throw exception
+//		assert(true);
+//	}
 
 	@Test
 	void testRecuperarUsers() {

@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -230,8 +232,15 @@ public class FieldController implements Initializable{
 	
 	@FXML
 	private void saveGame() {
-		Main.getIndexModel().serializarUsers();
-		System.out.println("Mi mama me mima");
+		try {
+			Main.getIndexModel().serializarUsers();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void generateTraps() {

@@ -355,28 +355,24 @@ public class Index {
 	/**
 	 * Method serializarUsers
 	 * Serialize the collection of users
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void serializarUsers()  {
-		try {
-			File file = new File("files/Users.dat");
-			if(file.exists()== false) {
-				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-				oos.writeObject(users);
-				oos.close();	
-			}else {
-				FileWriter fl = new FileWriter(file);
-				BufferedWriter bf = new BufferedWriter(fl);
-				bf.write("");
-				bf.close();
-				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-				oos.writeObject(users);
-				oos.close();	
-				
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void serializarUsers() throws FileNotFoundException, IOException  {
+		File file = new File("files/Users.dat");
+		if(file.exists()== false) {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+			oos.writeObject(users);
+			oos.close();	
+		}else {
+			FileWriter fl = new FileWriter(file);
+			BufferedWriter bf = new BufferedWriter(fl);
+			bf.write("");
+			bf.close();
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+			oos.writeObject(users);
+			oos.close();			
+		} 
 	}
 	
 	

@@ -29,11 +29,6 @@ public class IndexController implements Initializable{
     private ImageView field1;
     @FXML
     private ImageView character1;
-    
-    private Character actualCharacter;
-    
-    private Field actualField;
-
     @FXML
     private ImageView leftArrowCharacter, rightArrowCharacter;
     @FXML
@@ -41,8 +36,6 @@ public class IndexController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		actualCharacter = Main.getIndexModel().getHeadCharacter();
-		actualField = Main.getIndexModel().getHeadField();
 		character1.setImage(new Image(Main.getIndexModel().getHeadCharacter().getImage()));
 		field1.setImage(new Image(Main.getIndexModel().getHeadField().getImage()));
 	}

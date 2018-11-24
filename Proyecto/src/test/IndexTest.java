@@ -38,7 +38,17 @@ class IndexTest {
 	}
 	
 	private void escenario3() {
+		escenario1();
+		index.setHeadCharacter(null);
+	}
 	
+	private void escenario4() {
+		escenario1();
+		index.setHeadField(null);
+	}
+	private void escenario5() {
+		escenario1();
+		index.setUsers(null);
 	}
 	
 	@Test
@@ -112,12 +122,17 @@ class IndexTest {
 
 	@Test
 	void testLoadCharacters() {
-		fail("Not yet implemented");
+		escenario3();
+		index.loadCharacters();
+		assertNotNull(index.getHeadCharacter());
+		
 	}
 
 	@Test
 	void testLoadFields() {
-		fail("Not yet implemented");
+		escenario4();
+		index.loadFields();
+		assertNotNull(index.getHeadField());
 	}
 
 
@@ -129,6 +144,31 @@ class IndexTest {
 		assertEquals(character,index.getHeadCharacter());
 	}
 
+	@Test
+	void testSaveCharacterAtMiddle() {
+		escenario1();
+		Character character = new Character(10, 10,"Loki","/images/loki.png");
+		index.saveCharacters(character, index.getHeadCharacter(), null);
+		try {
+			assertEquals(character,index.searchCharacter("Loki"));
+		} catch (CharacterDoesNotExist e) {
+			fail("No se esperaba esto");
+		}
+	}
+	
+	
+	@Test
+	void testSaveCharacterAtEnd() {
+		escenario1();
+		Character character = new Character(10, 10,"Aaron","/images/Aaron.png");
+		index.saveCharacters(character, index.getHeadCharacter(), null);
+		try {
+			assertEquals(character,index.searchCharacter("Aaron"));
+		} catch (CharacterDoesNotExist e) {
+			fail("No se esperaba esto");
+		}
+	}
+	
 	@Test
 	void testCircularListCharacter() {
 		escenario1();
@@ -147,6 +187,15 @@ class IndexTest {
 		}else {
 			fail("No se esperaba esto");
 		}
+	}
+	
+	@Test
+	void testChoosenUser() {
+		escenario1();
+		String data = "Sebb" + "\t" + "12";
+		index.choosenUser(data);
+		assertNotNull(index.getCharacterChoose());
+
 	}
 
 	@Test
@@ -250,7 +299,7 @@ class IndexTest {
 		String name = "Tho";
 		try {
 			Character character = index.searchCharacter(name);
-			fail("No se esperaba excepcion");
+			fail("Se esperaba excepcion");
 		} catch (CharacterDoesNotExist e) {
 			assert(true);
 		}
@@ -311,12 +360,16 @@ class IndexTest {
 
 	@Test
 	void testSerializarUsers() {
-		fail("Not yet implemented");
+		escenario1();
+		index.serializarUsers();
+		//If the method does not throw exception
+		assert(true);
 	}
 
 	@Test
 	void testRecuperarUsers() {
-		fail("Not yet implemented");
+		escenario5();
+		assertNotNull(index.recuperarUsers());
 	}
 
 }

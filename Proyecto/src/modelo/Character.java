@@ -219,12 +219,11 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 	 */
 	public Character searchCharacter(String nombre) {
 		Character toReturn = null;
-		if(next == null) {
-			return null;
-		}
-		else if(this.nickname.equalsIgnoreCase(nombre)) {
+		
+		if(this.nickname.equalsIgnoreCase(nombre)) {
 			toReturn =  this;
 		}else {
+			if(this.next!=null)
 			toReturn = this.next.searchCharacter(nombre);
 		}
 		return toReturn;

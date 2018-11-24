@@ -42,6 +42,7 @@ public class Index {
 	
 	private User userChoose;
 	
+	
 	/**
 	 *Index Constructor
 	 */
@@ -210,7 +211,11 @@ public class Index {
 	 * @param previous: previous character
 	 */
 	public void saveCharacters(Character character, Character actual, Character previous) {
-
+		if(headCharacter!=null) {
+			if(headCharacter.getPrevious()!=null) {
+				noCircular();
+			}
+		}	
 		if(this.headCharacter==null) {
 			this.headCharacter = character;
 		}else {
@@ -457,9 +462,12 @@ public class Index {
 	}
 	
 	public Character searchCharacter(String nombre) throws CharacterDoesNotExist {
-		noCircular();
+		
 		Character ch = null;
 		if(headCharacter != null) {
+			if(headCharacter.getPrevious()!=null) {
+				noCircular();
+			}
 			ch = headCharacter.searchCharacter(nombre);
 		}else{
 			ch = null;
@@ -510,6 +518,16 @@ public class Index {
 	}
 
 	
+	public User getUserChoose() {
+		return userChoose;
+	}
+
+
+	public void setUserChoose(User userChoose) {
+		this.userChoose = userChoose;
+	}
+
+
 	/**
 	 * 
 	 * @param users
@@ -560,7 +578,7 @@ public class Index {
 		String name = info[0];
 		int score = Integer.parseInt(info[1]);
 		userChoose = new User(name,score);
-		System.out.println(userChoose.toString());
+		//System.out.println(userChoose.toString());
 	}
 }
 

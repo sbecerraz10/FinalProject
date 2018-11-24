@@ -23,8 +23,6 @@ import modelo.Index;
 
 public class SearchController implements Initializable{
 	
-	Index index = new Index();
-	
     @FXML
     private Button B_Select;
 
@@ -37,9 +35,9 @@ public class SearchController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(Main.getIndexModel().getUsers().size()!=0){
-			String[] coachs = Main.getIndexModel().writeUsers().split(",");
-			for(int i = 0; i<coachs.length;i++) {
-				ListView.getItems().add(coachs[i]);
+			String[] users = Main.getIndexModel().writeUsers().split(",");
+			for(int i = 0; i<users.length;i++) {
+				ListView.getItems().add(users[i]);
 			}
 		}
 	}

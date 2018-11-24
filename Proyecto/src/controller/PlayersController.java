@@ -25,9 +25,9 @@ public class PlayersController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(Main.getIndexModel().getUsers().size()!=0){
-			String[] coachs = Main.getIndexModel().writeUsers().split(",");
-			for(int i = 0; i<coachs.length;i++) {
-				listUsers.getItems().add(coachs[i]);
+			String[] users = Main.getIndexModel().writeUsers().split(",");
+			for(int i = 0; i<users.length;i++) {
+				listUsers.getItems().add(users[i]);
 			}
 		}
 	}

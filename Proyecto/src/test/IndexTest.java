@@ -1,7 +1,9 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;	
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,16 +28,17 @@ class IndexTest {
 	}
 	
 	
-	void escenario1() {
+	private void escenario1() {
 		index = new Index();
 	}
 	
 	private void escenario2() throws NicknameNotValid, UserAlreadyExists {
 		escenario1();
-		index.registrerUser("sebb");
-		index.registrerUser("Ana");
-		index.registrerUser("Cristian");
+		index.registrerUser("Seeebb");
+		index.registrerUser("Aaron");
+		index.registrerUser("Wandaaa");
 	}
+	
 	
 	private void escenario3() {
 		escenario1();
@@ -49,6 +52,17 @@ class IndexTest {
 	private void escenario5() {
 		escenario1();
 		index.setUsers(null);
+	}
+	
+	private void escenario6() {
+		escenario1();
+		index.getUsers().clear();
+		User temp1 = new User("Camilo",0);
+		User temp2 = new User("Sebb",0);
+		User temp3 = new User("CrisD",0);		
+		index.getUsers().add(temp1);
+		index.getUsers().add(temp2);
+		index.getUsers().add(temp3);
 	}
 	
 	@Test
@@ -104,20 +118,27 @@ class IndexTest {
 
 	@Test
 	void testOrdenarUserName() {
-//		try {
-//			escenario2();
-//		} catch (NicknameNotValid e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		assertEquals("Ana",index.ordenarUserName().get(0).getName());
-//		
-		fail("Not yet implemented");
+		try {
+			escenario2();
+		} catch (NicknameNotValid e) {
+			fail("No se esperaba esto");
+		} catch (UserAlreadyExists e) {
+			fail("No se esperaba esto");			
+		}
+		assertEquals("Aaron",index.ordenarUserName().get(0).getName());
+		
 	}
 
 	@Test
 	void testWriteUsers() {
-		fail("Not yet implemented");
+		escenario6();
+		String expected = "Camilo" + "\t" +"0" +","+ 
+		"Sebb"+"\t"+"0"+","+
+		"CrisD"+"\t"+"0"+","		
+	;
+		
+		assertEquals(expected,index.writeUsers());
+	
 	}
 
 	@Test
@@ -358,13 +379,17 @@ class IndexTest {
 	
 	
 
-//	@Test
-//	void testSerializarUsers() {
-//		escenario1();
-//		index.serializarUsers();
-//		//If the method does not throw exception
-//		assert(true);
-//	}
+	@Test
+	void testSerializarUsers() {
+		escenario1();
+		try {
+			index.serializarUsers();
+			assert(true);
+			//If the method does not throw exception
+		} catch (IOException e) {
+			fail("No esperaba esto");
+		}
+	}
 
 	@Test
 	void testRecuperarUsers() {

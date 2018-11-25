@@ -88,15 +88,59 @@ public class Index {
 	 * @return users - Collection of users
 	 */
 	public ArrayList<User> ordenarUserName() {	
-		int in;
-		for (int i = 1 ; i < users.size(); i++) {
-			User aux = users.get(i);
-			in = i;             
-			while (in > 0 && users.get(in - 1).compareTo(aux)>0) {
-				users.set(in, users.get(in-1));
-				--in;
-			} 
-			users.set(in, aux);
+//		int in;
+//		for (int i = 1 ; i < users.size(); i++) {
+//			User aux = users.get(i);
+//			in = i;             
+//			while (in > 0 && users.get(in - 1).compareTo(aux)>0) {
+//				users.set(in, users.get(in-1));
+//				--in;
+//			} 
+//			users.set(in, aux);
+//		}
+		for (int i = 1; i < users.size(); i++) {
+			for (int j = users.size() - 1; j >= i; j--) {
+				if(users.get(j).compareTo(users.get(j-1))<0) {
+					User aux = users.get(j);
+					users.set(j,users.get(j-1));
+					users.set(j-1,aux);
+				}
+			}
+		}
+		return users;
+	}
+	
+	public ArrayList<User> ordenarUserBestGame() {	
+		for (int i = 1; i < users.size(); i++) {
+			for (int j = users.size() - 1; j >= i; j--) {
+				if(users.get(j).getBestGame().compareTo(users.get(j-1).getBestGame())<0) {
+					User aux = users.get(j);
+					users.set(j,users.get(j-1));
+					users.set(j-1,aux);
+				}
+			}
+		}
+		return users;
+	}
+	
+	public ArrayList<User> ordenarUserFirstGame() {	
+		for(int i = 1; i<users.size(); i++) {
+			for(int j = i; (j > 0) && (users.get(j-1).getFirstGame().compareTo(users.get(j).getFirstGame())<0);j--) {
+				User aux = users.get(j);
+				users.set(j,users.get(j-1));
+				users.set(j-1,aux);
+			}
+		}
+		return users;
+	}
+	
+	public ArrayList<User> ordenarUserLastGame() {	
+		for(int i = 1; i<users.size(); i++) {
+			for(int j = i; (j > 0) && (users.get(j-1).getLastGame().compareTo(users.get(j).getLastGame())<0);j--) {
+				User aux = users.get(j);
+				users.set(j,users.get(j-1));
+				users.set(j-1,aux);
+			}
 		}
 		return users;
 	}

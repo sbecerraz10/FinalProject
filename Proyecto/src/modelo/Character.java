@@ -50,6 +50,7 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 		this.previous = null;
 		this.posy = 243;
 		this.posx = 346;
+		this.rootGemma = null;
 	}
 	
 	

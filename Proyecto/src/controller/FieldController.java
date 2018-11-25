@@ -336,6 +336,7 @@ public class FieldController implements Initializable{
     	URL gg6 = getClass().getResource("/images/Gema_Realidad.png");
     	Image g6 = new Image(gg6.toString(),50,50,false,true);
 		
+    	Main.getIndexModel().getFieldChoose().addGemma(1);
 		Main.getIndexModel().getFieldChoose().addGemma(6);
 		Main.getIndexModel().getFieldChoose().addGemma(2);
 		Main.getIndexModel().getFieldChoose().addGemma(5);

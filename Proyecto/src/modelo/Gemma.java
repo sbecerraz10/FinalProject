@@ -87,7 +87,7 @@ public class Gemma implements InterfaceMovement{
     		}else {
     			rigth.add(nueva);
     		}
-    	}else {
+    	}else if(this.power > nueva.power){
     		if(left == null) {
     			left = nueva;
     		}else {
@@ -95,6 +95,13 @@ public class Gemma implements InterfaceMovement{
     		}
     	}
         
+    }
+    
+    public int getWeight( )
+    {
+        int p1 = ( left == null ) ? 0 : left.getWeight( );
+        int p2 = ( rigth == null ) ? 0 : rigth.getWeight( );
+        return 1 + p1 + p2;
     }
      
     public void showInList(ArrayList<Gemma> list) {

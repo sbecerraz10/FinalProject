@@ -95,6 +95,7 @@ public class FieldController implements Initializable{
 					gemmaImages.get(i).setLayoutY(gemma.get(i).getPosy());
 					if(Main.getIndexModel().getCharacterChoose().take((int)gemmaImages.get(i).getLayoutX(),(int) gemmaImages.get(i).getLayoutY())) {
 						gemmaImages.get(i).setVisible(false);
+						Main.getIndexModel().getCharacterChoose().catchGemma(gemma.get(i));
 						if(gemma.get(i).getPower() == 1) {
 							gema1.setOpacity(1);
 						}
@@ -113,7 +114,10 @@ public class FieldController implements Initializable{
 						if(gemma.get(i).getPower() == 6) {
 							gema6.setOpacity(1);
 						}
-						
+//						System.out.println(Main.getIndexModel().getCharacterChoose().getWeight());
+//						if(Main.getIndexModel().getCharacterChoose().getWeight() == 6) {
+//							thread.stop();
+//						}						
 					}
 				}
 				
@@ -245,10 +249,10 @@ public class FieldController implements Initializable{
 	
 	private void generateTraps() {
 		
-		URL bomb = getClass().getResource("/images/bomb.png");
+		URL bomb = getClass().getResource("/images/bomb2.png");
     	Image bomba = new Image(bomb.toString(),50,50,false,true);
     	
-    	URL elect = getClass().getResource("/images/electricityTrap.png");
+    	URL elect = getClass().getResource("/images/electricity2.png");
     	Image electri = new Image(elect.toString(),50,50,false,true);
  
 		traps = Main.getIndexModel().getFieldChoose().getTraps();

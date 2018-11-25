@@ -51,7 +51,9 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 		this.posy = 243;
 		this.posx = 346;
 	}
-
+	
+	
+	
 	public boolean isUp() {
 		return up;
 	}
@@ -209,6 +211,23 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 			cth = true;
 		}
 		return cth;
+	}
+	
+	public void catchGemma(Gemma g) {
+		if(rootGemma == null) {
+			rootGemma = g;
+		}else{		
+			rootGemma.add(g);
+		}
+			
+	}
+	
+	public int getWeight() {
+		if(rootGemma == null) {
+			return 0;
+		}else {
+			return this.rootGemma.getWeight();
+		}
 	}
 	
 

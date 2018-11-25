@@ -39,7 +39,7 @@ public class Field implements Comparable<Field>{
 		traps = new ArrayList<Trap>();
 		generateTraps();
 		//generateGemma();
-		rootGemma = new Gemma(1);
+		//rootGemma = new Gemma(1);
 		chronometer = new Chronometer();
 	}
 	

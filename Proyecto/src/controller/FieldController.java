@@ -109,6 +109,7 @@ public class FieldController implements Initializable{
 		
 		initializeScene();
 
+		
 			thread = new Timeline(new KeyFrame(Duration.ZERO, e-> {		
 				if(vivo) {
 					catchGemma();

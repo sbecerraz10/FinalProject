@@ -14,12 +14,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import modelo.Bomb;
@@ -73,61 +72,46 @@ public class FieldController implements Initializable{
     
     @FXML
     private Text chronometer;
+    
+    @FXML
+    private ArrayList<Rectangle> life;
+    
+    @FXML
+    private Rectangle life6;
+
+    @FXML
+    private Rectangle life5;
+
+    @FXML
+    private Rectangle life4;
+
+    @FXML
+    private Rectangle life3;
+
+    @FXML
+    private Rectangle life2;
+
+    @FXML
+    private Rectangle life1;
+
+    @FXML
+    private Rectangle life0;
+    
+    private boolean vivo;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		chronometer();
-		traps = new ArrayList<>();
-		trapsImages = new ArrayList<>();
-		gemma = new ArrayList<>();
-		gemmaImages = new ArrayList<>();
-		generateGemmas();
-		generateTraps();
 		
-		field.setImage(new Image(Main.getIndexModel().getFieldChoose().getImage()));
-		gema1.setOpacity(0.50);
-		gema2.setOpacity(0.50);
-		gema3.setOpacity(0.50);
-		gema4.setOpacity(0.50);
-		gema5.setOpacity(0.50);
-		gema6.setOpacity(0.50);	
-		character.setImage(new Image(Main.getIndexModel().getCharacterChoose().getImage()));
+		vivo = true;
+		
+		initializeScene();
 
-			thread = new Timeline(new KeyFrame(Duration.ZERO, e-> {
-
-				for(int i = 0; i<gemma.size();i++) {
-					gemma.get(i).move();
-					gemmaImages.get(i).setLayoutX(gemma.get(i).getPosx());
-					gemmaImages.get(i).setLayoutY(gemma.get(i).getPosy());
-					if(Main.getIndexModel().getCharacterChoose().take((int)gemmaImages.get(i).getLayoutX(),(int) gemmaImages.get(i).getLayoutY())) {
-						gemmaImages.get(i).setVisible(false);
-						Main.getIndexModel().getCharacterChoose().catchGemma(gemma.get(i));
-						if(gemma.get(i).getPower() == 1) {
-							gema1.setOpacity(1);
-						}
-						if(gemma.get(i).getPower() == 2) {
-							gema2.setOpacity(1);
-						}
-						if(gemma.get(i).getPower() == 3) {
-							gema3.setOpacity(1);
-						}
-						if(gemma.get(i).getPower() == 4) {
-							gema4.setOpacity(1);
-						}
-						if(gemma.get(i).getPower() == 5) {
-							gema5.setOpacity(1);
-						}
-						if(gemma.get(i).getPower() == 6) {
-							gema6.setOpacity(1);
-						}
-//						System.out.println(Main.getIndexModel().getCharacterChoose().getWeight());
-//						if(Main.getIndexModel().getCharacterChoose().getWeight() == 6) {
-//							thread.stop();
-//						}						
-					}
+			thread = new Timeline(new KeyFrame(Duration.ZERO, e-> {		
+				if(vivo) {
+					catchGemma();
+				}else {
+					thread.stop();
 				}
-				
-				
 			}),new KeyFrame(Duration.millis(30)));
 			
 			thread.setCycleCount(Animation.INDEFINITE);
@@ -135,19 +119,17 @@ public class FieldController implements Initializable{
 			
 		
 		trapsThread = new Timeline(new KeyFrame(Duration.ZERO, e-> {
-			
-			for(int i = 0; i<traps.size();i++) {
-				traps.get(i).move();
-				trapsImages.get(i).setLayoutX(traps.get(i).getX());
-				trapsImages.get(i).setLayoutY(traps.get(i).getY());
-				if(Main.getIndexModel().getCharacterChoose().take((int)trapsImages.get(i).getLayoutX(),(int) trapsImages.get(i).getLayoutY())) {
-					trapsImages.get(i).setVisible(false);
-				}
+			if(vivo) {
+				catchTrap();
+			}else {
+				trapsThread.stop();
 			}
 		}),new KeyFrame(Duration.millis(30)));
 		
 		trapsThread.setCycleCount(Animation.INDEFINITE);
 		trapsThread.play();
+		
+			
 		
 		
 	}
@@ -231,51 +213,6 @@ public class FieldController implements Initializable{
 		timer.start();
 	}
 	
-	private void moveDown() {
-		Main.getIndexModel().getCharacterChoose().setDown(true);
-		Main.getIndexModel().getCharacterChoose().move();
-		character.setLayoutX(Main.getIndexModel().getCharacterChoose().getPosx());
-		character.setLayoutY(Main.getIndexModel().getCharacterChoose().getPosy());
-		
-	}
-
-	private void moveUp() {
-		Main.getIndexModel().getCharacterChoose().setUp(true);
-		Main.getIndexModel().getCharacterChoose().move();
-		character.setLayoutX(Main.getIndexModel().getCharacterChoose().getPosx());
-		character.setLayoutY(Main.getIndexModel().getCharacterChoose().getPosy());
-		
-	}
-
-	public void moveRight() {
-		Main.getIndexModel().getCharacterChoose().setRight(true);
-		Main.getIndexModel().getCharacterChoose().move();
-		character.setLayoutX(Main.getIndexModel().getCharacterChoose().getPosx());
-		character.setLayoutY(Main.getIndexModel().getCharacterChoose().getPosy());
-	}
-	
-	public void moveLeft() {
-		Main.getIndexModel().getCharacterChoose().setLeft(true);
-		Main.getIndexModel().getCharacterChoose().move();
-		character.setLayoutX(Main.getIndexModel().getCharacterChoose().getPosx());
-		character.setLayoutY(Main.getIndexModel().getCharacterChoose().getPosy());
-	}
-	
-	public void disableRight() {
-		Main.getIndexModel().getCharacterChoose().setRight(false);
-	}
-	
-	public void disableLeft() {
-		Main.getIndexModel().getCharacterChoose().setLeft(false);
-	}
-	
-	public void disableUp() {
-		Main.getIndexModel().getCharacterChoose().setUp(false);
-	}
-	
-	public void disableDown() {
-		Main.getIndexModel().getCharacterChoose().setDown(false);
-	}
 	
 	public void chronometer() {
 		ThreadChronometer ch = new ThreadChronometer(Main.getIndexModel().getFieldChoose(),chronometer);
@@ -357,6 +294,103 @@ public class FieldController implements Initializable{
 		gemmaImages.get(5).setImage(g6);
 		
 		pane.getChildren().addAll(gemmaImages);
+	}
+	
+	public void catchTrap() {
+		for(int i = 0; i<traps.size();i++) {
+			traps.get(i).move();
+			trapsImages.get(i).setLayoutX(traps.get(i).getX());
+			trapsImages.get(i).setLayoutY(traps.get(i).getY());
+			if(Main.getIndexModel().getCharacterChoose().take((int)trapsImages.get(i).getLayoutX(),(int) trapsImages.get(i).getLayoutY())) {
+				if(trapsImages.get(i).isVisible()) {
+					if(traps.get(i) instanceof Bomb){
+						int contador = 0;
+						for(int j = 0; j<life.size()&&contador<2;j++) {
+							if(life.get(j).isVisible()) {
+								life.get(j).setVisible(false);
+								contador++;
+							}
+						}
+					}else {
+						int contador = 0;
+						for(int j = 0; j<life.size()&&contador<1;j++) {
+							if(life.get(j).isVisible()) {
+								life.get(j).setVisible(false);
+								contador++;
+							}
+						}
+					}
+				}
+				trapsImages.get(i).setVisible(false);
+				
+			}
+		}
+		
+		if(!life.get(6).isVisible()) {
+			vivo = false;
+			System.out.println("PERDISTE");
+		}
+	}
+	
+	public void catchGemma() {
+		for(int i = 0; i<gemma.size();i++) {
+			gemma.get(i).move();
+			gemmaImages.get(i).setLayoutX(gemma.get(i).getPosx());
+			gemmaImages.get(i).setLayoutY(gemma.get(i).getPosy());
+			if(Main.getIndexModel().getCharacterChoose().take((int)gemmaImages.get(i).getLayoutX(),(int) gemmaImages.get(i).getLayoutY())) {
+				gemmaImages.get(i).setVisible(false);
+				Main.getIndexModel().getCharacterChoose().catchGemma(gemma.get(i));
+				if(gemma.get(i).getPower() == 1) {
+					gema1.setOpacity(1);
+				}
+				if(gemma.get(i).getPower() == 2) {
+					gema2.setOpacity(1);
+				}
+				if(gemma.get(i).getPower() == 3) {
+					gema3.setOpacity(1);
+				}
+				if(gemma.get(i).getPower() == 4) {
+					gema4.setOpacity(1);
+				}
+				if(gemma.get(i).getPower() == 5) {
+					gema5.setOpacity(1);
+				}
+				if(gemma.get(i).getPower() == 6) {
+					gema6.setOpacity(1);
+				}
+//				System.out.println(Main.getIndexModel().getCharacterChoose().getWeight());
+//				if(Main.getIndexModel().getCharacterChoose().getWeight() == 6) {
+//					thread.stop();
+//				}						
+			}
+		}
+	}
+	
+	public void initializeScene() {
+		life = new ArrayList<>();
+		life.add(life0);
+		life.add(life1);
+		life.add(life2);
+		life.add(life3);
+		life.add(life4);
+		life.add(life5);
+		life.add(life6);
+		chronometer();
+		traps = new ArrayList<>();
+		trapsImages = new ArrayList<>();
+		gemma = new ArrayList<>();
+		gemmaImages = new ArrayList<>();
+		generateGemmas();
+		generateTraps();
+		
+		field.setImage(new Image(Main.getIndexModel().getFieldChoose().getImage()));
+		gema1.setOpacity(0.50);
+		gema2.setOpacity(0.50);
+		gema3.setOpacity(0.50);
+		gema4.setOpacity(0.50);
+		gema5.setOpacity(0.50);
+		gema6.setOpacity(0.50);	
+		character.setImage(new Image(Main.getIndexModel().getCharacterChoose().getImage()));
 	}
 	
 }

@@ -7,14 +7,18 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import application.Main;
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -34,6 +38,8 @@ public class FieldController implements Initializable{
 	private ArrayList<Gemma> gemma;
 	
 	private Timeline thread;
+	
+	private Timeline timeline;
 	
 	private Timeline trapsThread;
 
@@ -142,45 +148,85 @@ public class FieldController implements Initializable{
 		
 		trapsThread.setCycleCount(Animation.INDEFINITE);
 		trapsThread.play();
+		
+		
 	}
 	
 	public void receiveScene(Scene scene) {
 		onKeyPressed(scene);
+		onKeyReleased(scene);
+		movement();
 	}
 
 	@FXML
 	public void onKeyPressed(Scene scene) {
-		scene.setOnKeyPressed(e->{
-			switch(e.getCode()) {
-			case LEFT: 
-				disableRight();
-				disableUp();
-				disableDown();
-				moveLeft();
-					break;
+		
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				switch(event.getCode()) {
+				case LEFT: 
+					Main.getIndexModel().getCharacterChoose().setLeft(true);
+						break;
 				case RIGHT: 
-				disableLeft();
-				disableUp();
-				disableDown();
-				moveRight();
-					break;	
+					Main.getIndexModel().getCharacterChoose().setRight(true);
+						break;	
 				case UP: 
-				disableDown();
-				disableRight();
-				disableLeft();
-				moveUp();
+					Main.getIndexModel().getCharacterChoose().setUp(true);
 					break;
 				case DOWN: 
-				disableUp();
-				disableRight();
-				disableLeft();
-				moveDown();
-					break;
-				default:
-					break;
-				}
+					Main.getIndexModel().getCharacterChoose().setDown(true);					
+						break;
+				}		
+					
+			}
 			
 		});
+		
+		
+	}
+	
+	private void onKeyReleased(Scene scene) {
+		scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				switch(event.getCode()) {
+				case LEFT: 
+					Main.getIndexModel().getCharacterChoose().setLeft(false);
+						break;
+				case RIGHT: 
+					Main.getIndexModel().getCharacterChoose().setRight(false);
+						break;	
+				case UP: 
+					Main.getIndexModel().getCharacterChoose().setUp(false);
+					break;
+				case DOWN: 
+					Main.getIndexModel().getCharacterChoose().setDown(false);					
+						break;
+				}			
+					
+			}
+			
+		});
+	}
+	
+	private void movement() {
+		AnimationTimer timer = new AnimationTimer() {
+
+			@Override
+			public void handle(long arg0) {
+				Main.getIndexModel().getCharacterChoose().move();
+				int x = Main.getIndexModel().getCharacterChoose().getPosx();
+				int y = Main.getIndexModel().getCharacterChoose().getPosy();
+				character.relocate(x, y);
+				
+			}
+			
+		};
+		
+		timer.start();
 	}
 	
 	private void moveDown() {

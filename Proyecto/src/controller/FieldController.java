@@ -119,7 +119,7 @@ public class FieldController implements Initializable{
 				if(win) {
 					System.out.println("GANASTE");
 					thread.stop();
-					Main.getIndexModel().getUserChoose().setScore(Main.getIndexModel().getUserChoose().getScore()+10);
+					//Main.getIndexModel().getUserChoose().setScore(Main.getIndexModel().getUserChoose().getScore()+10);
 					
 				}
 			}),new KeyFrame(Duration.millis(30)));

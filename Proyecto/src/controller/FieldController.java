@@ -364,6 +364,7 @@ public class FieldController implements Initializable{
 //					thread.stop();
 //				}						
 			}
+			
 		}
 	}
 	

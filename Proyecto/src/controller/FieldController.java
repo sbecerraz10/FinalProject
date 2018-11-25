@@ -41,7 +41,6 @@ public class FieldController implements Initializable{
 	private Timeline timeline;
 	
 	private Timeline trapsThread;
-
  
 	@FXML
     private ImageView field;
@@ -98,9 +97,13 @@ public class FieldController implements Initializable{
     private Rectangle life0;
     
     private boolean vivo;
+    
+    private boolean win;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		win = false;
 		
 		vivo = true;
 		
@@ -111,6 +114,12 @@ public class FieldController implements Initializable{
 					catchGemma();
 				}else {
 					thread.stop();
+				}
+				if(win) {
+					System.out.println("GANASTE");
+					thread.stop();
+					Main.getIndexModel().getUserChoose().setScore(Main.getIndexModel().getUserChoose().getScore()+10);
+					
 				}
 			}),new KeyFrame(Duration.millis(30)));
 			
@@ -125,6 +134,11 @@ public class FieldController implements Initializable{
 			}else {
 				trapsThread.stop();
 			}
+			if(win) {
+				System.out.println("GANASTE");
+				trapsThread.stop();
+			}
+			
 		}),new KeyFrame(Duration.millis(30)));
 		
 		trapsThread.setCycleCount(Animation.INDEFINITE);
@@ -359,13 +373,25 @@ public class FieldController implements Initializable{
 				if(gemma.get(i).getPower() == 6) {
 					gema6.setOpacity(1);
 				}
-//				System.out.println(Main.getIndexModel().getCharacterChoose().getWeight());
-//				if(Main.getIndexModel().getCharacterChoose().getWeight() == 6) {
-//					thread.stop();
-//				}						
+						
 			}
 			
 		}
+		
+		if(gema1.getOpacity() == 1.0 && gema2.getOpacity() == 1.0 && gema3.getOpacity() == 1.0 && gema4.getOpacity() == 1.0 && gema5.getOpacity() == 1.0 && gema6.getOpacity() == 1.0 ) {
+			win = true;
+		}
+	}
+	
+
+	public void winGame() {
+		boolean win = false;
+		for(int i = 0; i<gemmaImages.size() ;i++ ) {
+			if(!gemmaImages.get(i).isVisible()) {
+				win = true;
+			}
+		}
+		
 	}
 	
 	public void initializeScene() {

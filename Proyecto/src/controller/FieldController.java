@@ -117,6 +117,7 @@ public class FieldController implements Initializable{
 			thread.setCycleCount(Animation.INDEFINITE);
 			thread.play();
 			
+			
 		
 		trapsThread = new Timeline(new KeyFrame(Duration.ZERO, e-> {
 			if(vivo) {

@@ -157,6 +157,31 @@ public class Index {
 		}
 		return cadena;
     }
+	
+	public String writeUsersB() {
+		String cadena = "";
+		for(int i = 0;i<users.size();i++) {
+			cadena += users.get(i).getName()+"\t"+users.get(i).getBestGame()+",";
+		}
+		return cadena;
+    }
+	
+	public String writeUsersL() {
+		String cadena = "";
+		for(int i = 0;i<users.size();i++) {
+			cadena += users.get(i).getName()+"\t"+users.get(i).getLastGame()+",";
+		}
+		return cadena;
+    }
+	
+	public String writeUsersF() {
+		String cadena = "";
+		for(int i = 0;i<users.size();i++) {
+			cadena += users.get(i).getName()+"\t"+users.get(i).getFirstGame()+",";
+		}
+		return cadena;
+    }
+	
 	/**
 	 * Method loadCharacters
 	 * Load the characters from a text file

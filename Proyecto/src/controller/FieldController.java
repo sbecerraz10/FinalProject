@@ -211,7 +211,9 @@ public class FieldController implements Initializable{
 			
 		});
 	}
-	
+	/**
+	 * Method for character movement
+	 */
 	private void movement() {
 		AnimationTimer timer = new AnimationTimer() {
 

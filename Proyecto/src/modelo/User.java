@@ -47,7 +47,9 @@ public class User implements Comparable<User>, Serializable{
 	}
 
 	public void setFirstGame(String firstGame) {
+		if(firstGame.equals("")) {
 		this.firstGame = firstGame;
+		}
 	}
 
 	public String getLastGame() {

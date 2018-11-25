@@ -143,8 +143,14 @@ public class Field implements Comparable<Field>{
 	}
 	
 	public void addGemma(int n){
+		
 		Gemma nueva = new Gemma(n);
-		rootGemma.add(nueva);
+		if(rootGemma!=null) {
+			rootGemma.add(nueva);
+		}else {
+			rootGemma = nueva;
+		}
+		
 	}
 	
 	public ArrayList<Gemma> showList( ){

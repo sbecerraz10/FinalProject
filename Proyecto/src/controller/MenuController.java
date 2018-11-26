@@ -122,7 +122,7 @@ public class MenuController implements Initializable{
 	@FXML
 	public void searchPlayerScore() {
 		TextInputDialog dialog = new TextInputDialog();
-		dialog.setContentText("Ingrese el nombre del usuario que sea buscar: ");
+		dialog.setContentText("Ingrese el puntaje del usuario que sea buscar: ");
 		Optional<String> result = dialog.showAndWait();
 		if(result.isPresent()){
 			try {

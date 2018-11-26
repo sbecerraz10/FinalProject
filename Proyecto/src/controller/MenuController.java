@@ -125,15 +125,19 @@ public class MenuController implements Initializable{
 		dialog.setContentText("Ingrese el nombre del usuario que sea buscar: ");
 		Optional<String> result = dialog.showAndWait();
 		if(result.isPresent()){
-			String criterio = result.get();
-			int score = Integer.parseInt(criterio);
 			try {
+				String criterio = result.get();
+				int score = Integer.parseInt(criterio);
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setContentText(Main.getIndexModel().searchUserScore(score).toString());
 				alert.show();
 			} catch (UserDoesNotExist e) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setContentText(e.getMessage());
+				alert.show();
+			}catch (NumberFormatException e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("¡Por favor ingrese numeros, no letras!");
 				alert.show();
 			}
 		}

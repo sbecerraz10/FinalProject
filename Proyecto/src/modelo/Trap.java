@@ -7,7 +7,7 @@ public class Trap implements InterfaceMovement,Comparable<Trap>{
 	private int damage;
 	private int x;
 	private int y;
-	
+	 
 	public Trap(int damage, int x, int y) {
 		this.damage = damage;
 		this.x = x;

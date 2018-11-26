@@ -19,14 +19,15 @@
          </image>
       </ImageView>
       <ListView fx:id="listUsers" layoutX="14.0" layoutY="45.0" prefHeight="210.0" prefWidth="184.0" />
-      <Button layoutX="272.0" layoutY="112.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" style="-fx-background-radius: 90;" text="Criterio1" />
-      <Button layoutX="271.0" layoutY="144.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" style="-fx-background-radius: 90;" text="Ciretrio2" />
-      <Button layoutX="270.0" layoutY="176.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" style="-fx-background-radius: 90;" text="Criterio3" />
-      <Button layoutX="270.0" layoutY="208.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" style="-fx-background-radius: 90;" text="Criterio4" />
+      <Button layoutX="272.0" layoutY="112.0" mnemonicParsing="false" onAction="#ordenar1" prefHeight="26.0" prefWidth="159.0" style="-fx-background-radius: 90;" text="Por nombre" />
+      <Button layoutX="271.0" layoutY="144.0" mnemonicParsing="false" onAction="#ordenar2" prefHeight="26.0" prefWidth="159.0" style="-fx-background-radius: 90;" text="Por puntos" />
+      <Button layoutX="270.0" layoutY="176.0" mnemonicParsing="false" onAction="#ordenar3" prefHeight="26.0" prefWidth="159.0" style="-fx-background-radius: 90;" text="Por mejor partida" />
+      <Button layoutX="270.0" layoutY="208.0" mnemonicParsing="false" onAction="#ordenar4" prefHeight="26.0" prefWidth="159.0" style="-fx-background-radius: 90;" text="Por ultima partida" />
       <ImageView fitHeight="38.0" fitWidth="39.0" onMouseClicked="#backToMenu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/home.png" />
          </image>
       </ImageView>
+      <Button layoutX="272.0" layoutY="240.0" mnemonicParsing="false" onAction="#ordenar5" prefHeight="26.0" prefWidth="159.0" style="-fx-background-radius: 90;" text="Por primer partida" />
    </children>
 </AnchorPane>

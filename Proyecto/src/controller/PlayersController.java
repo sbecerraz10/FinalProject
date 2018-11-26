@@ -24,8 +24,59 @@ public class PlayersController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+//		if(Main.getIndexModel().getUsers().size()!=0){
+//			String[] users = Main.getIndexModel().writeUsers().split(",");
+//			for(int i = 0; i<users.length;i++) {
+//				listUsers.getItems().add(users[i]);
+//			}
+//		}
+	}
+	
+	@FXML
+	public void ordenar1() {
+		listUsers.getItems().clear();
 		if(Main.getIndexModel().getUsers().size()!=0){
 			String[] users = Main.getIndexModel().writeUsers().split(",");
+			for(int i = 0; i<users.length;i++) {
+				listUsers.getItems().add(users[i]);
+			}
+		}
+	}
+	@FXML
+	public void ordenar2() {
+		listUsers.getItems().clear();
+		if(Main.getIndexModel().getUsers().size()!=0){
+			String[] users = Main.getIndexModel().writeUsers().split(",");
+			for(int i = 0; i<users.length;i++) {
+				listUsers.getItems().add(users[i]);
+			}
+		}
+	}
+	@FXML
+	public void ordenar3() {
+		listUsers.getItems().clear();
+		if(Main.getIndexModel().getUsers().size()!=0){
+			String[] users = Main.getIndexModel().writeUsersB().split(",");
+			for(int i = 0; i<users.length;i++) {
+				listUsers.getItems().add(users[i]);
+			}
+		}
+	}
+	@FXML
+	public void ordenar4() {
+		listUsers.getItems().clear();
+		if(Main.getIndexModel().getUsers().size()!=0){
+			String[] users = Main.getIndexModel().writeUsersL().split(",");
+			for(int i = 0; i<users.length;i++) {
+				listUsers.getItems().add(users[i]);
+			}
+		}
+	}
+	@FXML
+	public void ordenar5() {
+		listUsers.getItems().clear();
+		if(Main.getIndexModel().getUsers().size()!=0){
+			String[] users = Main.getIndexModel().writeUsersF().split(",");
 			for(int i = 0; i<users.length;i++) {
 				listUsers.getItems().add(users[i]);
 			}

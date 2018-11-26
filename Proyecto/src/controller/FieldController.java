@@ -99,6 +99,8 @@ public class FieldController implements Initializable{
     private boolean vivo;
     
     private boolean win;
+    
+    private ThreadChronometer ch;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -115,10 +117,22 @@ public class FieldController implements Initializable{
 					catchGemma();
 				}else {
 					thread.stop();
+					ch.stop();
 				}
 				if(win) {
 					System.out.println("GANASTE");
 					thread.stop();
+					ch.stop();
+					if(Main.getIndexModel().getUserChoose()==null) {
+						Main.getIndexModel().getUsers().get(Main.getIndexModel().getUsers().size()-1).bestGame(chronometer.getText());
+						Main.getIndexModel().getUsers().get(Main.getIndexModel().getUsers().size()-1).setLastGame(chronometer.getText());
+						Main.getIndexModel().getUsers().get(Main.getIndexModel().getUsers().size()-1).setFirstGame(chronometer.getText());
+					}else {
+						Main.getIndexModel().getUserChoose().bestGame(chronometer.getText());
+						Main.getIndexModel().getUserChoose().setLastGame(chronometer.getText());
+						Main.getIndexModel().getUserChoose().setFirstGame(chronometer.getText());
+						
+					}
 					//Main.getIndexModel().getUserChoose().setScore(Main.getIndexModel().getUserChoose().getScore()+10);
 					
 				}
@@ -144,10 +158,6 @@ public class FieldController implements Initializable{
 		
 		trapsThread.setCycleCount(Animation.INDEFINITE);
 		trapsThread.play();
-		
-			
-		
-		
 	}
 	
 	public void receiveScene(Scene scene) {
@@ -176,13 +186,9 @@ public class FieldController implements Initializable{
 				case DOWN: 
 					Main.getIndexModel().getCharacterChoose().setDown(true);					
 						break;
-				}		
-					
+				}			
 			}
-			
-		});
-		
-		
+		});		
 	}
 	
 	private void onKeyReleased(Scene scene) {
@@ -203,10 +209,8 @@ public class FieldController implements Initializable{
 				case DOWN: 
 					Main.getIndexModel().getCharacterChoose().setDown(false);					
 						break;
-				}			
-					
+				}				
 			}
-			
 		});
 	}
 	/**
@@ -223,15 +227,13 @@ public class FieldController implements Initializable{
 				character.relocate(x, y);
 				
 			}
-			
 		};
-		
 		timer.start();
 	}
 	
 	
 	public void chronometer() {
-		ThreadChronometer ch = new ThreadChronometer(Main.getIndexModel().getFieldChoose(),chronometer);
+		ch = new ThreadChronometer(Main.getIndexModel().getFieldChoose(),chronometer);
 		ch.start();
 	}
 	

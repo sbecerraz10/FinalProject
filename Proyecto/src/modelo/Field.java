@@ -42,62 +42,121 @@ public class Field implements Comparable<Field>{
 		chronometer = new Chronometer();
 	}
 	
+	/**
+     * Retorna el atributo name  
+     * @return name el atributo name  
+     */
 	public String getName() {
 		return name;
 	}
 
+	/**
+     * Modifica el atributo name 
+     * @param name el nuevo atributo name  
+     */ 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+     * Retorna el siguiente field de la lista enlazada de fields 
+     * @return next el siguiente field de la lista enlazada de fields 
+     */
 	public Field getNext() {
 		return next;
 	}
 
+	/**
+     * Modifica el siguiente campo de la lista enlazada 
+     * @param next el nuevo siguiente field  
+     */
 	public void setNext(Field next) {
 		this.next = next;
 	}
 
+	/**
+     * Retorna el anteior field de la lista enlazada de fields 
+     * @return previous el anterior field de la lista enlazada de fields 
+     */
 	public Field getPrevious() {
 		return previous;
 	}
 
+	/**
+     * Modifica el anterior campo de la lista enlazada 
+     * @param previous el nuevo anterior field  
+     */
 	public void setPrevious(Field previous) {
 		this.previous = previous;
 	}
 
+	/**
+     * Retorna el valor de la roootGemma  
+     * @return rootGemma la gemma cabeza del arbol de gemmas  
+     */
 	public Gemma getRootGemma() {
 		return rootGemma;
 	}
 
+	/**
+     * Modifica la raiz del arbol de gemmas
+     * @param rootGemma la nueva raiz del arbol   
+     */
 	public void setRootGemma(Gemma rootGemma) {
 		this.rootGemma = rootGemma;
 	}
 
+	/**
+     * Retorna la imagen del field
+     * @return image la imagen del field
+     */
 	public String getImage() {
 		return image;
 	}
-
+	
+	/**
+     * Modifica la imagen del field 
+     * @param image la nueva imagen del field  
+     */
 	public void setImage(String image) {
 		this.image = image;
 	}
 	
+	/**
+     * Retorna el cronometro del field
+     * @return chronometer el chronometro del field  
+     */
 	public Chronometer getChronometer() {
 		return chronometer;
 	}
 
+	/**
+     * Modifica el cronometro del field
+     * @param chronometer el nuevo chronometer del field  
+     */
 	public void setChronometer(Chronometer chronometer) {
 		this.chronometer = chronometer;
 	}
 
+	/**
+     * Retorna una lista de Trampas 
+     * @return traps la lista de trampas del field  
+     */
 	public ArrayList<Trap> getTraps() {
 		return traps;
 	}
 
+	/**
+     * Modifica la lista de trampas del field
+     * @param traps la nueva lista de trampas
+     */
 	public void setTraps(ArrayList<Trap> traps) {
 		this.traps = traps;
 	}
 
+	/**
+     * Genera un numero aleatorio de trampas para el field y agrega trampas a la lista de trampas
+     */
 	public void generateTraps() {
 		int numberOfBombs = (int)(Math.random()*7) + 2;
 		
@@ -136,6 +195,10 @@ public class Field implements Comparable<Field>{
 		return toReturn;
 	}
 	
+	/**
+     * Agrega una gemma al arbol de gemmas
+     * @param n el dato n que tendra la nueva gemma  
+     */
 	public void addGemma(int n){
 		
 		Gemma nueva = new Gemma(n);
@@ -147,6 +210,9 @@ public class Field implements Comparable<Field>{
 		
 	}
 	
+	/**
+     * Organiza la lista de trampas por su daño 
+     */
 	public void sortTrapsByDamage() {
 		for(int i= 0; i<traps.size();i++) {
 			int cual = i;
@@ -165,7 +231,10 @@ public class Field implements Comparable<Field>{
 		
 	}
 	
-	
+	/**
+     * Retorna el arbol binario de gemma en forma de lista
+     * @return la lista de gemmas  
+     */
 	public ArrayList<Gemma> showList( ){
 		
 		ArrayList<Gemma> out = new ArrayList<>();
@@ -174,6 +243,11 @@ public class Field implements Comparable<Field>{
             return out;  
     }
 	
+	/**
+     * Busca una gemma de acuerdo a su dato power 
+     * @param power el dato de la Gemma buscada
+     * @return la gemma encontrada con el dato power ingresado 
+     */
 	public Gemma searchGemma(int power) {
 		if(this.rootGemma == null) {
 			return null;
@@ -182,6 +256,11 @@ public class Field implements Comparable<Field>{
 		}
 	}
 	
+	/**
+     * Busca una gemma de acuerdo a nombre 
+     * @param nombre el nombre del field
+     * @return toReturn el campo con el nombre ingresado
+     */
 	public Field searchField(String name) {
 		Field toReturn = null;
 		if(this.name.equals(name)) {

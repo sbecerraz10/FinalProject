@@ -1,7 +1,8 @@
 package modelo;
 
 public class Chronometer {
-
+	//Atributos
+	
 	private int secondMinute;
 	private int firstMinute;
 	private int secondSeconnd;
@@ -14,6 +15,10 @@ public class Chronometer {
 		firstSecond=0;
 	}
 		
+	/**
+     * Retorna el segundo numero de los minutos
+     * @return secondMinute el segundo numero de los minutos
+     */
 	public int getSecondMinute() {
 		return secondMinute;
 	}
@@ -22,6 +27,10 @@ public class Chronometer {
 		this.secondMinute = secondMinute;
 	}
 
+	/**
+     * Retorna el primer numero de los minutos
+     * @return firstdMinute el primer numero de los minutos
+     */
 	public int getFirstMinute() {
 		return firstMinute;
 	}
@@ -29,6 +38,11 @@ public class Chronometer {
 	public void setFirstMinute(int firstMinute) {
 		this.firstMinute = firstMinute;
 	}
+	
+	/**
+     * Retorna el segundo numero de los segundos
+     * @return secondSeconnd el segundo numero de los segundos
+     */
 
 	public int getSecondSeconnd() {
 		return secondSeconnd;
@@ -38,6 +52,10 @@ public class Chronometer {
 		this.secondSeconnd = secondSeconnd;
 	}
 
+	/**
+     * Retorna el primer numero de los segundos
+     * @return firstSecond el primer numero de los segundos
+     */
 	public int getFirstSecond() {
 		return firstSecond;
 	}
@@ -46,10 +64,17 @@ public class Chronometer {
 		this.firstSecond = firstSecond;
 	}
 
+	/**
+     * Retorna el tiempo del cronometro
+     * @return el tiempo del cronometro
+     */
 	public String getTime() {
 		return secondMinute+""+firstMinute+":"+secondSeconnd+""+firstSecond;
 	}
 	
+	/**
+     * Inicializa el cronometro 
+     */
 	public void initiate() {
 		if(firstSecond<=8) {
 			firstSecond+=1;

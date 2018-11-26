@@ -158,6 +158,7 @@ public class Index {
 		return cadena;
     }
 	
+	
 	public String writeUsersB() {
 		ordenarUserLastGame();
 		String cadena = "";
@@ -166,7 +167,10 @@ public class Index {
 		}
 		return cadena;
     }
-	
+	/**
+     * Retorna una cadena de texto con los mejores juegos de los usuarios 
+     * @return cadena la cadena de texto con los mejores juegos de los usuarios
+     */
 	public String writeUsersL() {
 		ordenarUserLastGame();
 		String cadena = "";
@@ -176,6 +180,10 @@ public class Index {
 		return cadena;
     }
 	
+	/**
+     * Retorna una cadena de texto con el primer juego de los usuarios 
+     * @return cadena la cadena de texto con primer juego de los usuarios
+     */
 	public String writeUsersF() {
 		ordenarUserFirstGame();
 		String cadena = "";

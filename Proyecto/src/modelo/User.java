@@ -4,28 +4,49 @@ import java.io.Serializable;
 
 public class User implements Comparable<User>, Serializable{
 	
+	//Atributos
+	
 	private String name;
 	private int score;
 	private String bestGame;
 	private String firstGame;
 	private String lastGame;
 	
+	/**
+     * Retorna el nombre del usuario
+     * @return name el nombre del usuario
+     */
 	public String getName() {
 		return name;
 	}
 
+	/**
+     * Modifica el nombre del usuario
+     * @param name el nuevo nombre del usuario
+     */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+     * retorna el puntaje del usuario
+     * @return score el puntaje del usuario
+     */
 	public int getScore() {
 		return score;
 	}
 
+	/**
+     * Modifica el puntaje del usuario
+     * @param score el nuevo puntaje del usuario
+     */
 	public void setScore(int score) {
 		this.score = score;
 	}
 
+	/**
+     * Crea un objeto de tipo User
+     */
 	public User(String name, int score) {
 		this.name = name;
 		this.score = score;
@@ -34,32 +55,60 @@ public class User implements Comparable<User>, Serializable{
 		firstGame = "";
 	}
 
+	/**
+     * Retorna el mejor juego de un Usuario
+     * @return bestGame el mejor juego de un usuario
+     */
 	public String getBestGame() {
 		return bestGame;
 	}
 
+	/**
+     * Modifica el mejor juego de un usuario
+     * @param bestGame el nuevo mejor juego del usuario
+     */
 	public void setBestGame(String bestGame) {
 		this.bestGame = bestGame;
 	}
 	
+	/**
+     * Retorna el primer juego de un usuario
+     * @return firstGame el primer juego de un usuario
+     */
 	public String getFirstGame() {
 		return firstGame;
 	}
 
+	/**
+     * Modifica el primer juego de un usuario
+     * @param firstGame el nuevo primer juego del usuario
+     */
 	public void setFirstGame(String firstGame) {
 		if(this.firstGame.equals("")) {
 		this.firstGame = firstGame;
 		}
 	}
 
+	/**
+     * Retorna el ultimo juego de un usuario
+     * @return lastGame el ultimo juego del usuario
+     */
 	public String getLastGame() {
 		return lastGame;
 	}
 
+	/**
+     * Modifica el ultimo juego de un usuario
+     * @param lastGame el nuevo ultimo juego del usuario
+     */
 	public void setLastGame(String lastGame) {
 		this.lastGame = lastGame;
 	}
 
+	/**
+     * Calcula el mejor juego de un usuario con base el el tiempo
+     * @param tiempo el tiempo del juego 
+     */
 	public void bestGame(String time) {
 		if(bestGame.equals("")){
 			bestGame = time;

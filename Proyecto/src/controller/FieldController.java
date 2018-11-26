@@ -10,6 +10,7 @@ import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.binding.IntegerExpression;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,8 +38,6 @@ public class FieldController implements Initializable{
 	private ArrayList<Gemma> gemma;
 	
 	private Timeline thread;
-	
-	private Timeline timeline;
 	
 	private Timeline trapsThread;
  
@@ -118,22 +117,18 @@ public class FieldController implements Initializable{
 				}else {
 					thread.stop();
 					ch.stop();
+					System.out.println(chronometer.getText());
 				}
 				if(win) {
 					System.out.println("GANASTE");
 					thread.stop();
 					ch.stop();
-					if(Main.getIndexModel().getUserChoose()==null) {
-						Main.getIndexModel().getUsers().get(Main.getIndexModel().getUsers().size()-1).bestGame(chronometer.getText());
-						Main.getIndexModel().getUsers().get(Main.getIndexModel().getUsers().size()-1).setLastGame(chronometer.getText());
-						Main.getIndexModel().getUsers().get(Main.getIndexModel().getUsers().size()-1).setFirstGame(chronometer.getText());
-					}else {
+					
 						Main.getIndexModel().getUserChoose().bestGame(chronometer.getText());
 						Main.getIndexModel().getUserChoose().setLastGame(chronometer.getText());
 						Main.getIndexModel().getUserChoose().setFirstGame(chronometer.getText());
+						setScore();
 						
-					}
-					//Main.getIndexModel().getUserChoose().setScore(Main.getIndexModel().getUserChoose().getScore()+10);
 					
 				}
 			}),new KeyFrame(Duration.millis(30)));
@@ -150,7 +145,6 @@ public class FieldController implements Initializable{
 				trapsThread.stop();
 			}
 			if(win) {
-				System.out.println("GANASTE");
 				trapsThread.stop();
 			}
 			
@@ -158,6 +152,17 @@ public class FieldController implements Initializable{
 		
 		trapsThread.setCycleCount(Animation.INDEFINITE);
 		trapsThread.play();
+	}
+	
+	public void setScore() {
+		int score = 0;
+		int convert = 0;
+		String aux [] = chronometer.getText().split(":");
+		int seconnds = Integer.parseInt(aux[1]);
+		int minutes = Integer.parseInt(aux[0]);
+		convert = (minutes*60)+seconnds;
+		score = (int)(100 - convert*0.5);
+		Main.getIndexModel().getUserChoose().setScore(Main.getIndexModel().getUserChoose().getScore()+score);;
 	}
 	
 	public void receiveScene(Scene scene) {

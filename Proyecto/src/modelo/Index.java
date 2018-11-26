@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import exception.CharacterDoesNotExist;
 import exception.CharacterNotChoosen;
@@ -26,7 +27,7 @@ import exception.UserAlreadyExists;
  * @version nov-23-2018
  */
 
-public class Index {
+public class Index implements Comparator<User>{
 	
 	
 	//Atributos
@@ -78,26 +79,18 @@ public class Index {
 				throw new UserAlreadyExists();
 			}
 		}
-		users.add(new User(nickname,0));		
+		User add = new User(nickname,0);
+		users.add(add);
+		this.userChoose = add;
+		
 	}
 	
 	
 	/**
 	 * Method ordenarUserName
-	 * It sorts the users by name using the insertion method.
-	 * @return users - Collection of users
+	 * It sorts the users by name using the bubble method.
 	 */
-	public ArrayList<User> ordenarUserName() {	
-//		int in;
-//		for (int i = 1 ; i < users.size(); i++) {
-//			User aux = users.get(i);
-//			in = i;             
-//			while (in > 0 && users.get(in - 1).compareTo(aux)>0) {
-//				users.set(in, users.get(in-1));
-//				--in;
-//			} 
-//			users.set(in, aux);
-//		}
+	public void ordenarUserName() {	
 		for (int i = 1; i < users.size(); i++) {
 			for (int j = users.size() - 1; j >= i; j--) {
 				if(users.get(j).compareTo(users.get(j-1))<0) {
@@ -107,10 +100,26 @@ public class Index {
 				}
 			}
 		}
-		return users;
 	}
 	
-	public ArrayList<User> ordenarUserBestGame() {	
+	public void ordenarUserScore() {
+		for(int i= 0; i<users.size();i++) {
+			int cual = i;
+			User greater = users.get(i);
+			for(int j=i+1;j<users.size();j++) {
+				if(compare(greater, users.get(j))<0) {
+					greater = users.get(j);
+					cual = j;
+				}
+			}
+			
+			User temp = users.get(i);
+			users.set(i, greater);
+			users.set(cual, temp);
+		}
+	}
+	
+	public void ordenarUserBestGame() {	
 		for (int i = 1; i < users.size(); i++) {
 			for (int j = users.size() - 1; j >= i; j--) {
 				if(users.get(j).getBestGame().compareTo(users.get(j-1).getBestGame())>0) {
@@ -120,10 +129,9 @@ public class Index {
 				}
 			}
 		}
-		return users;
 	}
 	
-	public ArrayList<User> ordenarUserFirstGame() {	
+	public void ordenarUserFirstGame() {	
 		for(int i = 1; i<users.size(); i++) {
 			for(int j = i; (j > 0) && (users.get(j-1).getFirstGame().compareTo(users.get(j).getFirstGame())>0);j--) {
 				User aux = users.get(j);
@@ -131,10 +139,9 @@ public class Index {
 				users.set(j-1,aux);
 			}
 		}
-		return users;
 	}
 	
-	public ArrayList<User> ordenarUserLastGame() {	
+	public void ordenarUserLastGame() {	
 		for(int i = 1; i<users.size(); i++) {
 			for(int j = i; (j > 0) && (users.get(j-1).getLastGame().compareTo(users.get(j).getLastGame())>0);j--) {
 				User aux = users.get(j);
@@ -142,7 +149,6 @@ public class Index {
 				users.set(j-1,aux);
 			}
 		}
-		return users;
 	}
 	
 	/**
@@ -151,6 +157,20 @@ public class Index {
 	 * @return cadena- list of users with their names and score.
 	 */
 	public String writeUsers() {
+		String cadena = "";
+		for(int i = 0;i<users.size();i++) {
+			cadena += users.get(i).getName()+"\t"+users.get(i).getScore()+",";
+		}
+		return cadena;
+    }
+	
+	/**
+	 * Method writeUsersS
+	 * Returns a String with all users info.
+	 * @return cadena- list of users with their names and score.
+	 */
+	public String writeUsersS() {
+		ordenarUserScore();
 		String cadena = "";
 		for(int i = 0;i<users.size();i++) {
 			cadena += users.get(i).getName()+"\t"+users.get(i).getScore()+",";
@@ -479,31 +499,6 @@ public class Index {
 		return clon;
 	}
 	
-//	public void chooseCharacter(String id) throws CharacterNotChoosen {
-//		if(headCharacter != null) {
-//			if(headCharacter.getImage().equals(id)) {
-//				this.setCharacterChoose(headCharacter);
-//			}else {
-//				if(this.headCharacter.getNext()!=null)
-//					this.setCharacterChoose(headCharacter.searchCharacter(id));
-//			}
-//		}else {
-//			throw new CharacterNotChoosen();
-//		}
-//	}
-//	
-//	public void chooseField(String id) throws FieldNotChoosen {
-//		if(headField != null) {
-//			if(headField.getImage().equals(id)) {
-//				this.setFieldChoose(headField);
-//			}else {
-//				if(this.headField.getNext()!=null)
-//					this.setFieldChoose(headField.searchField(id));
-//			}
-//		}else {
-//			throw new FieldNotChoosen();
-//		}
-//	}
 	/**
 	 * Method getCharacterChoose
 	 * @return characterChoose- actual character
@@ -666,13 +661,24 @@ public class Index {
 	/**
 	 * 
 	 * @param message
+	 * @throws UserDoesNotExist 
 	 */
-	public void choosenUser(String data) {
+	public void choosenUser(String data) throws UserDoesNotExist {
 		String[] info = data.split("\t");
 		String name = info[0];
-		int score = Integer.parseInt(info[1]);
-		userChoose = new User(name,score);
+		userChoose = searchUser(name);
 		//System.out.println(userChoose.toString());
+	}
+	
+	@Override
+	public int compare(User user1, User user2) {
+		if(user1.getScore() < user2.getScore()) {
+			return -1;
+		}else if(user1.getScore() > user2.getScore()){
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 }
 

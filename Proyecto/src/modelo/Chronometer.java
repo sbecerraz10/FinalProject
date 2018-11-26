@@ -29,12 +29,16 @@ public class Chronometer {
 
 	/**
      * Retorna el primer numero de los minutos
-     * @return firstdMinute el primer numero de los minutos
+     * @return firstMinute el primer numero de los minutos
      */
 	public int getFirstMinute() {
 		return firstMinute;
 	}
 
+	/**
+     * Modifica el primer numero de los minutos del cronometro
+     * @param firstMinute el nuevo primer numero de los minutos
+     */
 	public void setFirstMinute(int firstMinute) {
 		this.firstMinute = firstMinute;
 	}
@@ -48,6 +52,10 @@ public class Chronometer {
 		return secondSeconnd;
 	}
 
+	/**
+     * Modifica el segundo numero de los segundos del cronometro
+     * @param secondSeconnd el nuevo segundo numero de los segundos
+     */
 	public void setSecondSeconnd(int secondSeconnd) {
 		this.secondSeconnd = secondSeconnd;
 	}
@@ -60,6 +68,10 @@ public class Chronometer {
 		return firstSecond;
 	}
 
+	/**
+     * Modifica el primer numero de los segundos del cronometro
+     * @param firstSecond el nuevo primer numero de los segundos
+     */
 	public void setFirstSecond(int firstSecond) {
 		this.firstSecond = firstSecond;
 	}
@@ -94,5 +106,15 @@ public class Chronometer {
 				}
 			}
 		}		
+	}
+	
+	public int convertToSeconds() {
+		int salida = 0;
+		String mins = secondMinute+""+firstMinute;
+		int minutes = Integer.parseInt(mins);
+		String secs = secondSeconnd+""+firstSecond;
+		int seconnds = Integer.parseInt(secs);
+		salida = (minutes*60)+seconnds;
+		return salida;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import application.Main;
 import exception.NicknameNotValid;
+import exception.UserDoesNotExist;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,10 +49,7 @@ public class SearchController implements Initializable{
 			String message = "";
 			ObservableList<String> user;
 			user = ListView.getSelectionModel().getSelectedItems();
-			for(String m : user) {
-				message = m;
-			}
-			Main.getIndexModel().choosenUser(message);
+			Main.getIndexModel().choosenUser(user.get(0));
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/application/IndexWindow.fxml"));
 			Parent root = loader.load();
@@ -60,6 +58,9 @@ public class SearchController implements Initializable{
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserDoesNotExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

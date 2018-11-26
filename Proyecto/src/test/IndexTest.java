@@ -162,7 +162,8 @@ class IndexTest {
 		} catch (UserAlreadyExists e) {
 			fail("No se esperaba esto");			
 		}
-		assertEquals("Aaron",index.ordenarUserName().get(0).getName());
+		index.ordenarUserName();
+		assertEquals("Aaron",index.getUsers().get(0).getName());
 		
 	}
 
@@ -276,9 +277,17 @@ class IndexTest {
 	 * It should test if the user choose attribute isn't null
 	 */
 	public void testChoosenUser() {
-		escenario1();
-		String data = "Sebb" + "\t" + "12";
-		index.choosenUser(data);
+		try {
+			escenario2();
+		} catch (NicknameNotValid | UserAlreadyExists e1) {
+			e1.printStackTrace();
+		}
+		String data = "Seeebb" + "\t" + "12";
+		try {
+			index.choosenUser(data);
+		} catch (UserDoesNotExist e) {
+			fail("No se esperaba esto");
+		}
 		assertNotNull(index.getUserChoose());
 
 	}

@@ -46,7 +46,7 @@ public class PlayersController implements Initializable{
 	public void ordenar2() {
 		listUsers.getItems().clear();
 		if(Main.getIndexModel().getUsers().size()!=0){
-			String[] users = Main.getIndexModel().writeUsers().split(",");
+			String[] users = Main.getIndexModel().writeUsersS().split(",");
 			for(int i = 0; i<users.length;i++) {
 				listUsers.getItems().add(users[i]);
 			}

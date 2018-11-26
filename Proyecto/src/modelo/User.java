@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class User implements Comparable<User>, Serializable{
 	
@@ -153,6 +154,7 @@ public class User implements Comparable<User>, Serializable{
 	public String toString() {
 		return "User [name=" + name + "- score=" + score + "]";
 	}
+
 	
 
 }

@@ -14,17 +14,17 @@
             <Image url="@../images/Marvel.jpg" />
          </image>
       </ImageView>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="193.0" layoutY="195.0" mnemonicParsing="false" onAction="#resumeGame" prefHeight="26.0" prefWidth="122.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Resume Game" textAlignment="CENTER" textFill="WHITE">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="175.0" mnemonicParsing="false" onAction="#resumeGame" prefHeight="26.0" prefWidth="156.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Resume Game" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="192.0" layoutY="267.0" mnemonicParsing="false" onAction="#searchPlayer" prefHeight="26.0" prefWidth="122.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Search Player" textFill="WHITE">
+      <Button layoutX="179.0" layoutY="243.0" mnemonicParsing="false" onAction="#searchPlayer" prefHeight="26.0" prefWidth="156.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Search Player by Name" textFill="WHITE">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="192.0" layoutY="230.0" mnemonicParsing="false" onAction="#ranking" prefHeight="26.0" prefWidth="122.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Ranking" textFill="WHITE">
+      <Button layoutX="180.0" layoutY="209.0" mnemonicParsing="false" onAction="#ranking" prefHeight="26.0" prefWidth="156.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Ranking" textFill="WHITE">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
@@ -34,12 +34,17 @@
             <Image url="@../images/avengers.png" />
          </image>
       </ImageView>
-      <Button layoutX="191.0" layoutY="306.0" mnemonicParsing="false" onAction="#searchCharacter" prefHeight="26.0" prefWidth="122.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Search Character" textFill="WHITE">
+      <Button layoutX="180.0" layoutY="310.0" mnemonicParsing="false" onAction="#searchCharacter" prefHeight="26.0" prefWidth="156.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Search Character" textFill="WHITE">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="155.0" mnemonicParsing="false" onAction="#play" prefHeight="26.0" prefWidth="122.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Play" textAlignment="CENTER" textFill="WHITE">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="142.0" mnemonicParsing="false" onAction="#play" prefHeight="26.0" prefWidth="156.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Play" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="180.0" layoutY="277.0" mnemonicParsing="false" onAction="#searchPlayerScore" prefHeight="26.0" prefWidth="156.0" style="-fx-background-radius: 90; -fx-background-color: #021e71;" text="Search Player by Score" textFill="WHITE">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>

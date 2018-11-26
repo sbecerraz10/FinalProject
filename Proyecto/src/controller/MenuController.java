@@ -118,6 +118,26 @@ public class MenuController implements Initializable{
 			}
 		}
 	}
+	
+	@FXML
+	public void searchPlayerScore() {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setContentText("Ingrese el nombre del usuario que sea buscar: ");
+		Optional<String> result = dialog.showAndWait();
+		if(result.isPresent()){
+			String criterio = result.get();
+			int score = Integer.parseInt(criterio);
+			try {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setContentText(Main.getIndexModel().searchUserScore(score).toString());
+				alert.show();
+			} catch (UserDoesNotExist e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText(e.getMessage());
+				alert.show();
+			}
+		}
+	}
 		
 		@FXML
 		public void searchCharacter(ActionEvent event) {

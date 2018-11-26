@@ -590,6 +590,31 @@ public class Index implements Comparator<User>{
 		return user;
 	}
 	
+	public User searchUserScore(int points) throws UserDoesNotExist {
+		ordenarUserScore();
+		User user = null;
+		boolean encontro = false;
+		int inicio = 0;
+		int ultimo = users.size()-1;
+		int centro;
+		while(inicio<=ultimo && !encontro) {
+			centro = (inicio+ultimo)/2;
+			if(users.get(centro).getScore()==points) {
+				user = users.get(centro);
+				encontro = true;
+			}else if(users.get(centro).getScore()>points) {
+				inicio = centro+1;
+			}else {
+				ultimo = centro-1;
+			}
+		}
+		if(user == null) {
+			throw new UserDoesNotExist();
+		}
+		
+		return user;
+	}
+	
 	public Field searchField(String name) {
 		if(headField == null) {
 			return null;

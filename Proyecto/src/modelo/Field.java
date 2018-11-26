@@ -278,17 +278,17 @@ public class Field implements Comparable<Field>{
 	public void loadGems() {
 		FileWriter fileout;
 		try {
-			fileout = new FileWriter("files.gems");
+			fileout = new FileWriter("files/gem.txt");
 			BufferedWriter buff =  new BufferedWriter(fileout);
-			Gemma temp = rootGemma;
 			int i = 0;
-			ArrayList<Gemma> list = new ArrayList<Gemma>();
-			temp.showInList(list);
-			while(i<list.size()){
-				buff.write(i +"  "+ list.get(i).getPower());
+			while(i<showList().size()){
+				buff.write("Gemma "+i +" "+ showList().get(i).getPower());
 				buff.newLine();	
 				i++;
 			}
+			
+			buff.flush();
+			fileout.close();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

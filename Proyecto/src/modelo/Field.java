@@ -1,5 +1,8 @@
 package modelo;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -273,4 +276,27 @@ public class Field implements Comparable<Field>{
 		}
 		return toReturn;
 	}
+	
+	
+	public void loadGems() {
+		FileWriter fileout;
+		try {
+			fileout = new FileWriter("files/gem.txt");
+			BufferedWriter buff =  new BufferedWriter(fileout);
+			int i = 0;
+			while(i<showList().size()){
+				buff.write("Gemma "+i +" "+ showList().get(i).getPower());
+				buff.newLine();	
+				i++;
+			}
+			
+			buff.flush();
+			fileout.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

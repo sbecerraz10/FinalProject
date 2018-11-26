@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import application.Main;
 import javafx.animation.Animation;
@@ -11,16 +12,23 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.IntegerExpression;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import modelo.Bomb;
 import modelo.Gemma;
@@ -28,6 +36,8 @@ import modelo.Trap;
 import threads.ThreadChronometer;
 
 public class FieldController implements Initializable{
+	
+	private AnimationTimer timer;
 	
 	private ArrayList<Trap> traps;
 	
@@ -100,6 +110,25 @@ public class FieldController implements Initializable{
     private boolean win;
     
     private ThreadChronometer ch;
+    
+    @FXML
+    private ImageView home;
+
+    @FXML
+    public void B_home(ActionEvent event) {
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/application/MenuWindow.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -115,21 +144,10 @@ public class FieldController implements Initializable{
 				if(vivo) {
 					catchGemma();
 				}else {
-					thread.stop();
-					ch.stop();
-					System.out.println(chronometer.getText());
+					//lose();
 				}
 				if(win) {
-					System.out.println("GANASTE");
-					thread.stop();
-					ch.stop();
-					
-						Main.getIndexModel().getUserChoose().bestGame(chronometer.getText());
-						Main.getIndexModel().getUserChoose().setLastGame(chronometer.getText());
-						Main.getIndexModel().getUserChoose().setFirstGame(chronometer.getText());
-						setScore();
-						
-					
+					win();
 				}
 			}),new KeyFrame(Duration.millis(30)));
 			
@@ -142,7 +160,7 @@ public class FieldController implements Initializable{
 			if(vivo) {
 				catchTrap();
 			}else {
-				trapsThread.stop();
+				lose();
 			}
 			if(win) {
 				trapsThread.stop();
@@ -154,6 +172,39 @@ public class FieldController implements Initializable{
 		trapsThread.play();
 	}
 	
+	private void lose() {
+		trapsThread.stop();
+		thread.stop();
+		timer.stop();
+		ch.stop();
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setHeaderText(null);
+		alert.setContentText("YOU LOSE YOUR SCORE WAS: 0");
+		alert.show();
+		home.setVisible(true);
+	}
+
+	private void win() {
+		System.out.println("GANASTE");
+		thread.stop();
+		ch.stop();
+		timer.stop();
+		Main.getIndexModel().getUserChoose().bestGame(chronometer.getText());
+		Main.getIndexModel().getUserChoose().setLastGame(chronometer.getText());
+		Main.getIndexModel().getUserChoose().setFirstGame(chronometer.getText());
+		setScore();
+		int convert = 0;
+		String aux [] = chronometer.getText().split(":");
+		int seconnds = Integer.parseInt(aux[1]);
+		int minutes = Integer.parseInt(aux[0]);
+		convert = (minutes*60)+seconnds;
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setHeaderText(null);
+		alert.setContentText("CONGRATULATIONS YOUR SCORE WAS: "+(100-convert));
+		alert.show();
+		home.setVisible(true);
+	}
+
 	public void setScore() {
 		int score = 0;
 		int convert = 0;
@@ -222,7 +273,7 @@ public class FieldController implements Initializable{
 	 * Method for character movement
 	 */
 	private void movement() {
-		AnimationTimer timer = new AnimationTimer() {
+		timer = new AnimationTimer() {
 
 			@Override
 			public void handle(long arg0) {
@@ -418,7 +469,7 @@ public class FieldController implements Initializable{
 		gemmaImages = new ArrayList<>();
 		generateGemmas();
 		generateTraps();
-		
+		Main.getIndexModel().getFieldChoose().loadGems();
 		field.setImage(new Image(Main.getIndexModel().getFieldChoose().getImage()));
 		gema1.setOpacity(0.50);
 		gema2.setOpacity(0.50);

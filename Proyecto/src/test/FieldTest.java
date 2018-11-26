@@ -13,7 +13,7 @@ import modelo.Gemma;
  * @version Nov-25-2018
  */
 
-class FieldTest {
+public class FieldTest {
 	
 	/**
 	 * Relationship with the class field

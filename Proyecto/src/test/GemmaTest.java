@@ -14,7 +14,7 @@ import modelo.Gemma;
  * @version Nov-25-2018
  */
 
-class GemmaTest {
+public class GemmaTest {
 
 	
 	//Relationship

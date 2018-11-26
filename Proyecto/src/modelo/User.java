@@ -108,7 +108,7 @@ public class User implements Comparable<User>, Serializable{
 
 	/**
      * Calcula el mejor juego de un usuario con base el el tiempo
-     * @param tiempo el tiempo del juego 
+     * @param time: tiempo el tiempo del juego 
      */
 	public void bestGame(String time) {
 		if(bestGame.equals("")){

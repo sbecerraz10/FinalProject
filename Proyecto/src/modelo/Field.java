@@ -264,7 +264,7 @@ public class Field implements Comparable<Field>{
 	
 	/**
      * Busca una gemma de acuerdo a nombre 
-     * @param nombre el nombre del field
+     * @param name : nombre el nombre del field
      * @return toReturn el campo con el nombre ingresado
      */
 	public Field searchField(String name) {

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * @author Sebastian Becerra, Cristian Sierra, Juan Camilo Vargas
  * @version Nov-25-2018
  */
-class CharacterTest {
+public class CharacterTest {
 
 	
 	//Relationship 

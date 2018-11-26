@@ -21,7 +21,7 @@ public class Gemma implements InterfaceMovement{
 		this.power = power;
 	}
 	/**
-	 * Se moficifa el atribuyo y el cual genera el movimiento 
+	 * Se modifica el atributo y el cual genera el movimiento 
 	 */
 	@Override
 	public void move() {
@@ -83,7 +83,7 @@ public class Gemma implements InterfaceMovement{
 
 	/**
      * Modifica la gemma derecha
-     * @param right la nueva gemma derecha
+     * @param rigth:  la nueva gemma derecha
      */
 	public void setRigth(Gemma rigth) {
 		this.rigth = rigth;

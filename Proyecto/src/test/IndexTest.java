@@ -25,7 +25,7 @@ import modelo.Field;
  */
 
 
-class IndexTest {
+public class IndexTest {
 
 	//Attributes
 	private Index index;

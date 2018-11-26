@@ -451,7 +451,7 @@ public class Index implements Comparator<User>{
 	/**
 	 * Method electedCharacter
 	 * @param elected: boolean that validate if the character has been chosen or not
-	 * @throws CharacterNotChoosen: throws if elected is false
+	 * @throws CharacterNotChoosen throws if elected is false
 	 */
 	public void electedCharacter(boolean elected) throws CharacterNotChoosen {
 		if(elected == false) {
@@ -461,7 +461,7 @@ public class Index implements Comparator<User>{
 	/**
 	 * Method electedField
 	 * @param elected:boolean that validate if the field has been chosen or not
-	 * @throws FieldNotChoosen: throws it if elected is false
+	 * @throws FieldNotChoosen  throws it if elected is false
 	 */
 	public void electedField(boolean elected) throws FieldNotChoosen {
 		if(elected == false) {

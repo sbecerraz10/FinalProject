@@ -247,6 +247,11 @@ public class Index {
 	 * @param previous: previous field of the list
 	 */
 	public void saveField(Field field, Field actual, Field previous) {
+		if(headField!=null) {
+			if(headField.getPrevious()!=null) {
+				noCirularField();
+			}
+		}
 		if(this.headField==null) {
 			this.headField = field;
 		}else {
@@ -529,6 +534,11 @@ public class Index {
 		headCharacter.setPrevious(null);
 	}
 	
+	public void noCirularField() {
+		headField.getPrevious().setNext(null);
+		headField.setPrevious(null);
+	}
+	
 	public Character searchCharacter(String nombre) throws CharacterDoesNotExist {
 		
 		Character ch = null;
@@ -575,6 +585,14 @@ public class Index {
 		}
 		
 		return user;
+	}
+	
+	public Field searchField(String name) {
+		if(headField == null) {
+			return null;
+		}else{
+			return headField.searchField(name);
+		}
 	}
 	
 	/**

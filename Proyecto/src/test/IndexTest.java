@@ -479,8 +479,11 @@ class IndexTest {
 		escenario1();
 		Field field = new Field("Loo","/images/loo.png");
 		index.saveField(field,index.getHeadField(),null);
-		//assertEquals(field,);
-		fail("Not yet implemented");
+		if(index.searchField("Loo") != null) {
+			assert(true);
+		}else {
+			fail("No esperaba esto");
+		}
 	}
 	
 	
@@ -490,10 +493,13 @@ class IndexTest {
 	 */
 	public void testSaveFieldAtEnd() {
 		escenario1();
-		Field field = new Field("Loo","/images/loo.png");
+		Field field = new Field("Aoo","/images/loo.png");
 		index.saveField(field,index.getHeadField(),null);
-		//assertEquals(field,);
-		fail("Not yet implemented");
+		if(index.searchField("Aoo") != null) {
+			assert(true);
+		}else {
+			fail("No esperaba esto");
+		}
 	}
 	
 	

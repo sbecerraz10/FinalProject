@@ -51,7 +51,7 @@ public class IndexController implements Initializable{
 	@FXML
 	/**
 	 * showNextCharacter
-	 * @param event: Mouse event
+	 * @param event : Mouse event
 	 */
 	public void showNextCharacter(MouseEvent event) {
 		Main.getIndexModel().showNextCharacter();

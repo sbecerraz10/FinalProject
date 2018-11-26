@@ -20,7 +20,9 @@ public class Gemma implements InterfaceMovement{
 	public Gemma(int power) {
 		this.power = power;
 	}
-	
+	/**
+	 * Se moficifa el atribuyo y el cual genera el movimiento 
+	 */
 	@Override
 	public void move() {
 		if(this.posy > LIMITY) {
@@ -28,7 +30,6 @@ public class Gemma implements InterfaceMovement{
 			int random = (int) (Math.random()*LIMITX)+5;
 			this.posx = random;
 		}
-		
 		this.posy += MOVEMENT_RATING_GEMMA;
 	}
 	

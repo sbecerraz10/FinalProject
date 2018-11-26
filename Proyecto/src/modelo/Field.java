@@ -183,7 +183,10 @@ public class Field implements Comparable<Field>{
 		
 	}
 	
-	
+	/**
+	 * Se comparan dos fields
+	 * @param field el campo con el que se va comparar
+	 */
 	@Override
 	public int compareTo(Field field) {
 		int toReturn = 0;

@@ -22,6 +22,11 @@ public class Chronometer {
 	public int getSecondMinute() {
 		return secondMinute;
 	}
+	
+	/**
+	 * Modifica el segundo numero de los minutos del cronometro
+	 * @param secondMinute el nuevo segundo numero de los minutos
+	 */
 
 	public void setSecondMinute(int secondMinute) {
 		this.secondMinute = secondMinute;
@@ -106,15 +111,5 @@ public class Chronometer {
 				}
 			}
 		}		
-	}
-	
-	public int convertToSeconds() {
-		int salida = 0;
-		String mins = secondMinute+""+firstMinute;
-		int minutes = Integer.parseInt(mins);
-		String secs = secondSeconnd+""+firstSecond;
-		int seconnds = Integer.parseInt(secs);
-		salida = (minutes*60)+seconnds;
-		return salida;
 	}
 }

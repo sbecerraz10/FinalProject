@@ -294,7 +294,10 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 		this.power = power;
 	}
 
-	
+	/**
+     * Compara dos characters por su nombre 
+     * @param character2 el character con el que se va a comparar
+     */
 	
 	@Override
 	public int compareTo(Character character2) {
@@ -316,6 +319,10 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 		}
 		return cth;
 	}
+	/**
+	 * Añade un gema que es atrapada a un abb
+	 * @param g la nueva gema que se atrapa
+	 */
 	
 	public void catchGemma(Gemma g) {
 		if(rootGemma == null) {
@@ -355,6 +362,10 @@ public class Character implements Comparable<Character>, InterfaceMovement {
 		}
 		return toReturn;
 	}
+	
+	/**
+	 * @return los atributos del character
+	 */
 	
 	@Override
 	public String toString() {

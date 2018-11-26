@@ -38,6 +38,7 @@ public class Field implements Comparable<Field>{
 		this.image = image;
 		traps = new ArrayList<Trap>();
 		generateTraps();
+		sortTrapsByDamage();
 		chronometer = new Chronometer();
 	}
 	
@@ -145,6 +146,25 @@ public class Field implements Comparable<Field>{
 		}
 		
 	}
+	
+	public void sortTrapsByDamage() {
+		for(int i= 0; i<traps.size();i++) {
+			int cual = i;
+			Trap greater = traps.get(i);
+			for(int j=i+1;j<traps.size();j++) {
+				if(greater.compareTo(traps.get(j)) < 0) {
+					greater = traps.get(j);
+					cual = j;
+				}
+			}
+			
+			Trap temp = traps.get(i);
+			traps.set(i, greater);
+			traps.set(cual, temp);
+		}
+		
+	}
+	
 	
 	public ArrayList<Gemma> showList( ){
 		

@@ -1,6 +1,6 @@
 package modelo;
 
-public class Trap implements InterfaceMovement{
+public class Trap implements InterfaceMovement,Comparable<Trap>{
 	
 	private int damage;
 	private int x;
@@ -44,6 +44,17 @@ public class Trap implements InterfaceMovement{
 		}
 		
 		this.y += MOVEMENT_RATING_TRAP;
+	}
+
+	@Override
+	public int compareTo(Trap trap2) {
+		if(this.damage < trap2.damage) {
+			return -1;
+		}else if(this.damage > trap2.damage) {
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 	
 }

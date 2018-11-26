@@ -41,7 +41,6 @@ public class FieldController implements Initializable{
 	private Timeline timeline;
 	
 	private Timeline trapsThread;
-
  
 	@FXML
     private ImageView field;
@@ -98,19 +97,44 @@ public class FieldController implements Initializable{
     private Rectangle life0;
     
     private boolean vivo;
+    
+    private boolean win;
+    
+    private ThreadChronometer ch;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		win = false;
 		
 		vivo = true;
 		
 		initializeScene();
 
+		
 			thread = new Timeline(new KeyFrame(Duration.ZERO, e-> {		
 				if(vivo) {
 					catchGemma();
 				}else {
 					thread.stop();
+					ch.stop();
+				}
+				if(win) {
+					System.out.println("GANASTE");
+					thread.stop();
+					ch.stop();
+					if(Main.getIndexModel().getUserChoose()==null) {
+						Main.getIndexModel().getUsers().get(Main.getIndexModel().getUsers().size()-1).bestGame(chronometer.getText());
+						Main.getIndexModel().getUsers().get(Main.getIndexModel().getUsers().size()-1).setLastGame(chronometer.getText());
+						Main.getIndexModel().getUsers().get(Main.getIndexModel().getUsers().size()-1).setFirstGame(chronometer.getText());
+					}else {
+						Main.getIndexModel().getUserChoose().bestGame(chronometer.getText());
+						Main.getIndexModel().getUserChoose().setLastGame(chronometer.getText());
+						Main.getIndexModel().getUserChoose().setFirstGame(chronometer.getText());
+						
+					}
+					//Main.getIndexModel().getUserChoose().setScore(Main.getIndexModel().getUserChoose().getScore()+10);
+					
 				}
 			}),new KeyFrame(Duration.millis(30)));
 			
@@ -125,14 +149,15 @@ public class FieldController implements Initializable{
 			}else {
 				trapsThread.stop();
 			}
+			if(win) {
+				System.out.println("GANASTE");
+				trapsThread.stop();
+			}
+			
 		}),new KeyFrame(Duration.millis(30)));
 		
 		trapsThread.setCycleCount(Animation.INDEFINITE);
 		trapsThread.play();
-		
-			
-		
-		
 	}
 	
 	public void receiveScene(Scene scene) {
@@ -161,13 +186,9 @@ public class FieldController implements Initializable{
 				case DOWN: 
 					Main.getIndexModel().getCharacterChoose().setDown(true);					
 						break;
-				}		
-					
+				}			
 			}
-			
-		});
-		
-		
+		});		
 	}
 	
 	private void onKeyReleased(Scene scene) {
@@ -188,10 +209,8 @@ public class FieldController implements Initializable{
 				case DOWN: 
 					Main.getIndexModel().getCharacterChoose().setDown(false);					
 						break;
-				}			
-					
+				}				
 			}
-			
 		});
 	}
 	/**
@@ -208,15 +227,13 @@ public class FieldController implements Initializable{
 				character.relocate(x, y);
 				
 			}
-			
 		};
-		
 		timer.start();
 	}
 	
 	
 	public void chronometer() {
-		ThreadChronometer ch = new ThreadChronometer(Main.getIndexModel().getFieldChoose(),chronometer);
+		ch = new ThreadChronometer(Main.getIndexModel().getFieldChoose(),chronometer);
 		ch.start();
 	}
 	
@@ -359,13 +376,25 @@ public class FieldController implements Initializable{
 				if(gemma.get(i).getPower() == 6) {
 					gema6.setOpacity(1);
 				}
-//				System.out.println(Main.getIndexModel().getCharacterChoose().getWeight());
-//				if(Main.getIndexModel().getCharacterChoose().getWeight() == 6) {
-//					thread.stop();
-//				}						
+						
 			}
 			
 		}
+		
+		if(gema1.getOpacity() == 1.0 && gema2.getOpacity() == 1.0 && gema3.getOpacity() == 1.0 && gema4.getOpacity() == 1.0 && gema5.getOpacity() == 1.0 && gema6.getOpacity() == 1.0 ) {
+			win = true;
+		}
+	}
+	
+
+	public void winGame() {
+		boolean win = false;
+		for(int i = 0; i<gemmaImages.size() ;i++ ) {
+			if(!gemmaImages.get(i).isVisible()) {
+				win = true;
+			}
+		}
+		
 	}
 	
 	public void initializeScene() {

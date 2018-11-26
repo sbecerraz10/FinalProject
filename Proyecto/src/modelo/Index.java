@@ -113,7 +113,7 @@ public class Index {
 	public ArrayList<User> ordenarUserBestGame() {	
 		for (int i = 1; i < users.size(); i++) {
 			for (int j = users.size() - 1; j >= i; j--) {
-				if(users.get(j).getBestGame().compareTo(users.get(j-1).getBestGame())<0) {
+				if(users.get(j).getBestGame().compareTo(users.get(j-1).getBestGame())>0) {
 					User aux = users.get(j);
 					users.set(j,users.get(j-1));
 					users.set(j-1,aux);
@@ -125,7 +125,7 @@ public class Index {
 	
 	public ArrayList<User> ordenarUserFirstGame() {	
 		for(int i = 1; i<users.size(); i++) {
-			for(int j = i; (j > 0) && (users.get(j-1).getFirstGame().compareTo(users.get(j).getFirstGame())<0);j--) {
+			for(int j = i; (j > 0) && (users.get(j-1).getFirstGame().compareTo(users.get(j).getFirstGame())>0);j--) {
 				User aux = users.get(j);
 				users.set(j,users.get(j-1));
 				users.set(j-1,aux);
@@ -136,7 +136,7 @@ public class Index {
 	
 	public ArrayList<User> ordenarUserLastGame() {	
 		for(int i = 1; i<users.size(); i++) {
-			for(int j = i; (j > 0) && (users.get(j-1).getLastGame().compareTo(users.get(j).getLastGame())<0);j--) {
+			for(int j = i; (j > 0) && (users.get(j-1).getLastGame().compareTo(users.get(j).getLastGame())>0);j--) {
 				User aux = users.get(j);
 				users.set(j,users.get(j-1));
 				users.set(j-1,aux);
@@ -157,6 +157,34 @@ public class Index {
 		}
 		return cadena;
     }
+	
+	public String writeUsersB() {
+		ordenarUserLastGame();
+		String cadena = "";
+		for(int i = 0;i<users.size();i++) {
+			cadena += users.get(i).getName()+"\t"+users.get(i).getBestGame()+",";
+		}
+		return cadena;
+    }
+	
+	public String writeUsersL() {
+		ordenarUserLastGame();
+		String cadena = "";
+		for(int i = 0;i<users.size();i++) {
+			cadena += users.get(i).getName()+"\t"+users.get(i).getLastGame()+",";
+		}
+		return cadena;
+    }
+	
+	public String writeUsersF() {
+		ordenarUserFirstGame();
+		String cadena = "";
+		for(int i = 0;i<users.size();i++) {
+			cadena += users.get(i).getName()+"\t"+users.get(i).getFirstGame()+",";
+		}
+		return cadena;
+    }
+	
 	/**
 	 * Method loadCharacters
 	 * Load the characters from a text file

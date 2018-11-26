@@ -87,10 +87,10 @@ public class Index implements Comparator<User>{
 	
 	
 	/**
-	 * Method ordenarUserName
+	 * Method sortUserName
 	 * It sorts the users by name using the bubble method.
 	 */
-	public void ordenarUserName() {	
+	public void sortUserName() {	
 		for (int i = 1; i < users.size(); i++) {
 			for (int j = users.size() - 1; j >= i; j--) {
 				if(users.get(j).compareTo(users.get(j-1))<0) {
@@ -102,7 +102,12 @@ public class Index implements Comparator<User>{
 		}
 	}
 	
-	public void ordenarUserScore() {
+	
+	/**
+	 * Method sortUserScore
+	 * It sorts the users by score using the selection method.
+	 */
+	public void sortUserScore() {
 		for(int i= 0; i<users.size();i++) {
 			int cual = i;
 			User greater = users.get(i);
@@ -119,7 +124,12 @@ public class Index implements Comparator<User>{
 		}
 	}
 	
-	public void ordenarUserBestGame() {	
+	
+	/**
+	 * Method sortUserName
+	 * It sorts the users by the best game using the insertion method.
+	 */
+	public void sortUserBestGame() {	
 		for (int i = 1; i < users.size(); i++) {
 			for (int j = users.size() - 1; j >= i; j--) {
 				if(users.get(j).getBestGame().compareTo(users.get(j-1).getBestGame())>0) {
@@ -131,7 +141,12 @@ public class Index implements Comparator<User>{
 		}
 	}
 	
-	public void ordenarUserFirstGame() {	
+	
+	/**
+	 * Method sortUserFirstGame
+	 * It sorts the users by their first game using the insertion method.
+	 */
+	public void sortUserFirstGame() {	
 		for(int i = 1; i<users.size(); i++) {
 			for(int j = i; (j > 0) && (users.get(j-1).getFirstGame().compareTo(users.get(j).getFirstGame())>0);j--) {
 				User aux = users.get(j);
@@ -141,7 +156,12 @@ public class Index implements Comparator<User>{
 		}
 	}
 	
-	public void ordenarUserLastGame() {	
+	
+	/**
+	 * Method sortUserLast
+	 * It sorts the users by name using the insertion method.
+	 */
+	public void sortUserLast() {	
 		for(int i = 1; i<users.size(); i++) {
 			for(int j = i; (j > 0) && (users.get(j-1).getLastGame().compareTo(users.get(j).getLastGame())>0);j--) {
 				User aux = users.get(j);
@@ -170,7 +190,7 @@ public class Index implements Comparator<User>{
 	 * @return cadena- list of users with their names and score.
 	 */
 	public String writeUsersS() {
-		ordenarUserScore();
+		sortUserScore();
 		String cadena = "";
 		for(int i = 0;i<users.size();i++) {
 			cadena += users.get(i).getName()+"\t"+users.get(i).getScore()+",";
@@ -178,9 +198,13 @@ public class Index implements Comparator<User>{
 		return cadena;
     }
 	
-	
+	/**
+	 * Method writeUsersB
+	 * Returns a String with all users info.
+	 * @return cadena- list of users with their names and score.
+	 */
 	public String writeUsersB() {
-		ordenarUserLastGame();
+		sortUserLast();
 		String cadena = "";
 		for(int i = 0;i<users.size();i++) {
 			cadena += users.get(i).getName()+"\t"+users.get(i).getBestGame()+",";
@@ -192,7 +216,7 @@ public class Index implements Comparator<User>{
      * @return cadena la cadena de texto con los mejores juegos de los usuarios
      */
 	public String writeUsersL() {
-		ordenarUserLastGame();
+		sortUserLast();
 		String cadena = "";
 		for(int i = 0;i<users.size();i++) {
 			cadena += users.get(i).getName()+"\t"+users.get(i).getLastGame()+",";
@@ -205,7 +229,7 @@ public class Index implements Comparator<User>{
      * @return cadena la cadena de texto con primer juego de los usuarios
      */
 	public String writeUsersF() {
-		ordenarUserFirstGame();
+		sortUserFirstGame();
 		String cadena = "";
 		for(int i = 0;i<users.size();i++) {
 			cadena += users.get(i).getName()+"\t"+users.get(i).getFirstGame()+",";
@@ -375,16 +399,7 @@ public class Index implements Comparator<User>{
 		previous.setNext(headField);
 		headField.setPrevious(previous);
 	}
-	/**
-	 * Method showNextCharacter
-	 * Receives a character and return the next 
-	 * pre: actual!=null
-	 * @param actual: character that belongs to the circular list of characters 
-	 * @return: next character of actual character
-	 */
-//	public Character showNextCharacter(Character actual) {
-//		return actual.getNext();
-//	}
+	
 	
 	
 	/**
@@ -410,28 +425,26 @@ public class Index implements Comparator<User>{
 	
 	
 	/**
-	 * Method showPreviousField
-	 * Receives a field and return the previous one
-	 * pre: actual!=null
-	 * @param actual : field that belongs to the the circular list of fields
-	 * @return : previous field of the actual one
+	 * Select the next Character
 	 */
-	public Field showPreviosField(Field actual) {
-		return actual.getPrevious();
-	}
-	
 	public void showNextCharacter() {
 		this.characterChoose = this.characterChoose.getNext();
 	}
-	
+	/**
+	 * Select the previous Character
+	 */
 	public void showPreviousCharacter() {
 		this.characterChoose = this.characterChoose.getPrevious();
 	}
-	
+	/**
+	 * Select the next Field
+	 */
 	public void showNextField() {
 		this.fieldChoose = this.fieldChoose.getNext();
 	}
-	
+	/**
+	 * Select the previous Field
+	 */
 	public void showPreviousField() {
 		this.fieldChoose = this.fieldChoose.getPrevious();
 	}
@@ -508,7 +521,7 @@ public class Index implements Comparator<User>{
 	}
 
 	/**
-	 * 
+	 * Method setCharacterChoose
 	 * @param characterChoose
 	 */
 	public void setCharacterChoose(Character characterChoose) {
@@ -517,31 +530,44 @@ public class Index implements Comparator<User>{
 
 	
 	/**
-	 * 
-	 * @return
+	 * Method getFieldChoose
+	 * @return fieldChoose
 	 */
 	public Field getFieldChoose() {
 		return fieldChoose;
 	}
 
 	/**
-	 * 
+	 * setFieldChoose
 	 * @param fieldChoose
 	 */
 	public void setFieldChoose(Field fieldChoose) {
 		this.fieldChoose = fieldChoose;
 	}
-	
+	/**
+	 * Convert the circular list to a non circular list
+	 */
 	public void noCircular(){
 		headCharacter.getPrevious().setNext(null);
 		headCharacter.setPrevious(null);
 	}
 	
+	
+	/**
+	 * Convert the circular list to a non circular list
+	 */
 	public void noCirularField() {
 		headField.getPrevious().setNext(null);
 		headField.setPrevious(null);
 	}
 	
+	
+	/**
+	 * Method searchCharacter
+	 * @param nombre: name of the character
+	 * @return Character or null
+	 * @throws CharacterDoesNotExist
+	 */
 	public Character searchCharacter(String nombre) throws CharacterDoesNotExist {
 		
 		Character ch = null;
@@ -561,12 +587,12 @@ public class Index implements Comparator<User>{
 	}
 	
 	/**
-	 * 
-	 * @param criterio
-	 * @return
+	 * searchUser
+	 * @param nombre: name of the user
+	 * @return user or null
 	 */
 	public User searchUser(String nombre) throws UserDoesNotExist {
-		ordenarUserName();
+		sortUserName();
 		User user = null;
 		boolean encontro = false;
 		int inicio = 0;
@@ -590,8 +616,15 @@ public class Index implements Comparator<User>{
 		return user;
 	}
 	
+	
+	/**
+	 * searchUserScore
+	 * @param points: points
+	 * @return User
+	 * @throws UserDoesNotExist : exception
+	 */
 	public User searchUserScore(int points) throws UserDoesNotExist {
-		ordenarUserScore();
+		sortUserScore();
 		User user = null;
 		boolean encontro = false;
 		int inicio = 0;
@@ -615,6 +648,12 @@ public class Index implements Comparator<User>{
 		return user;
 	}
 	
+	
+	/**
+	 * searchField
+	 * @param name : name of the field
+	 * @return Field or null
+	 */
 	public Field searchField(String name) {
 		if(headField == null) {
 			return null;
@@ -624,26 +663,32 @@ public class Index implements Comparator<User>{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * getUsers
+	 * @return users
 	 */
 	public ArrayList<User> getUsers() {
 		return users;
 	}
 
-	
+	/**
+	 * getUserChoose
+	 * @return userChoose
+	 */
 	public User getUserChoose() {
 		return userChoose;
 	}
 
-
+	/**
+	 * setUserChoose
+	 * @param userChoose
+	 */
 	public void setUserChoose(User userChoose) {
 		this.userChoose = userChoose;
 	}
 
 
 	/**
-	 * 
+	 * setUsers
 	 * @param users
 	 */
 	public void setUsers(ArrayList<User> users) {
@@ -651,7 +696,7 @@ public class Index implements Comparator<User>{
 	}
 
 	/**
-	 * 
+	 * getHeadField
 	 * @return headField
 	 */
 	public Field getHeadField() {
@@ -659,7 +704,7 @@ public class Index implements Comparator<User>{
 	}
 
 	/**
-	 * 
+	 * setHeadField
 	 * @param headField
 	 */
 	public void setHeadField(Field headField) {
@@ -667,15 +712,15 @@ public class Index implements Comparator<User>{
 	}
 
 	/**
-	 * 
-	 * @return
+	 * getHeadCharacter
+	 * @return headCharacter
 	 */
 	public Character getHeadCharacter() {
 		return headCharacter;
 	}
 
 	/**
-	 * 
+	 * setHeadCharacter
 	 * @param headCharacter
 	 */
 	public void setHeadCharacter(Character headCharacter) {
@@ -684,8 +729,8 @@ public class Index implements Comparator<User>{
 	
 	
 	/**
-	 * 
-	 * @param message
+	 * choosenUser
+	 * @param data: user data
 	 * @throws UserDoesNotExist 
 	 */
 	public void choosenUser(String data) throws UserDoesNotExist {
@@ -694,6 +739,7 @@ public class Index implements Comparator<User>{
 		userChoose = searchUser(name);
 		//System.out.println(userChoose.toString());
 	}
+	
 	
 	@Override
 	public int compare(User user1, User user2) {

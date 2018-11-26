@@ -23,8 +23,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import modelo.Field;
 
+
+/**
+ * IndexController Class
+ * @author Sebastian Becerra Z., Cristian Sierra, Juan Camilo Vargas
+ * @version Nov-26-2018
+ */
+
+
 public class IndexController implements Initializable{
-	
+	//Attributes
 	@FXML
     private ImageView field1;
     @FXML
@@ -41,29 +49,49 @@ public class IndexController implements Initializable{
 	}
 	
 	@FXML
+	/**
+	 * showNextCharacter
+	 * @param event: Mouse event
+	 */
 	public void showNextCharacter(MouseEvent event) {
 		Main.getIndexModel().showNextCharacter();
 		character1.setImage(new Image(Main.getIndexModel().getCharacterChoose().getImage()));
 	}
 	@FXML
+	/**
+	 * showPreviousCharacter
+	 * @param event: Mouse event
+	 */
 	public void showPreviousCharacter(MouseEvent event) {
 		Main.getIndexModel().showPreviousCharacter();
 		character1.setImage(new Image(Main.getIndexModel().getCharacterChoose().getImage()));
 	}
 	
 	@FXML
+	/**
+	 * showNextField
+	 * @param event: Mouse event
+	 */
 	public void showNextField(MouseEvent t) {
 		Main.getIndexModel().showNextField();
 		field1.setImage(new Image(Main.getIndexModel().getFieldChoose().getImage()));
 	}
 	
 	@FXML
+	/**
+	 * showPreviousField
+	 * @param event: Mouse event
+	 */
 	public void showPreviousField(MouseEvent t) {
 		Main.getIndexModel().showPreviousField();
 		field1.setImage(new Image(Main.getIndexModel().getFieldChoose().getImage()));
 	}
 	
 	@FXML
+	/**
+	 * selectCharacter
+	 * @param event: Mouse event
+	 */
 	public void selectCharacter(MouseEvent event) {
 		character1.setOpacity(0.65);
 		leftArrowCharacter.setVisible(false);
@@ -71,6 +99,10 @@ public class IndexController implements Initializable{
 	}
 	
 	@FXML
+	/**
+	 * selectField
+	 * @param event: Mouse event
+	 */
 	public void selectField(MouseEvent event) {
 		field1.setOpacity(0.65);
 		leftArrowField.setVisible(false);
@@ -78,6 +110,10 @@ public class IndexController implements Initializable{
 	}
 	
 	@FXML
+	/**
+	 * play
+	 * @param event: Action Event
+	 */
 	public void play(ActionEvent event) {
 		try {
 			if(field1.getOpacity() != 0.65) {
@@ -98,9 +134,6 @@ public class IndexController implements Initializable{
 			stage.show();
 		}catch(IOException e) {
 			e.printStackTrace();
-//			Alert a = new Alert(AlertType.ERROR);
-//			a.setContentText(e.getMessage());
-//			a.show();
 		} catch (FieldNotChoosen e) {
 			Alert a = new Alert(AlertType.ERROR);
 			a.setContentText(e.getMessage());
@@ -113,7 +146,10 @@ public class IndexController implements Initializable{
 		
 	}
 
-	
+	/**
+	 * backToMenu
+	 * @param event: MouseEvent
+	 */
 	public void backToMenu(MouseEvent event) {
 		try {
 		FXMLLoader loader = new FXMLLoader();

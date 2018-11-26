@@ -162,7 +162,7 @@ class IndexTest {
 		} catch (UserAlreadyExists e) {
 			fail("No se esperaba esto");			
 		}
-		index.ordenarUserName();
+		index.sortUserName();
 		assertEquals("Aaron",index.getUsers().get(0).getName());
 		
 	}

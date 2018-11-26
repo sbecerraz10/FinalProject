@@ -442,16 +442,6 @@ public class FieldController implements Initializable{
 		}
 	}
 	
-
-	public void winGame() {
-		boolean win = false;
-		for(int i = 0; i<gemmaImages.size() ;i++ ) {
-			if(!gemmaImages.get(i).isVisible()) {
-				win = true;
-			}
-		}
-		
-	}
 	
 	public void initializeScene() {
 		life = new ArrayList<>();

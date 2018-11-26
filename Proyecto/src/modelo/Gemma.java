@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 
+
 public class Gemma implements InterfaceMovement{
 
 	private Gemma left;
@@ -14,6 +15,9 @@ public class Gemma implements InterfaceMovement{
 	
 	private int posx;
 	
+	public Gemma(int power) {
+		this.power = power;
+	}
 	
 	@Override
 	public void move() {
@@ -38,41 +42,25 @@ public class Gemma implements InterfaceMovement{
 		return posx;
 	}
 
-	public Gemma(int power) {
-		this.power = power;
-	}
-
-
-
 	public Gemma getLeft() {
 		return left;
 	}
-
-
 
 	public void setLeft(Gemma left) {
 		this.left = left;
 	}
 
-
-
 	public Gemma getRigth() {
 		return rigth;
 	}
-
-
 
 	public void setRigth(Gemma rigth) {
 		this.rigth = rigth;
 	}
 
-
-
 	public int getPower() {
 		return power;
 	}
-
-
 
 	public void setPower(int power) {
 		this.power = power;
@@ -94,6 +82,17 @@ public class Gemma implements InterfaceMovement{
     			left.add(nueva);
     		}
     	}
+        
+    }
+    
+    
+    public Gemma searchGemma(int power) {
+            if( this.power == power )
+                return this;
+            else if( this.power > power )
+                return ( left == null ) ? null : left.searchGemma( power );
+            else
+                return ( rigth == null ) ? null : rigth.searchGemma( power );
         
     }
     

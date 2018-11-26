@@ -18,20 +18,29 @@ import modelo.User;
 import modelo.Character;
 import modelo.Field;
 
+/**
+ * IndexTest class
+ * @author Sebastian Becerra, Cristian Sierra, Juan Camilo Vargas
+ * @version Nov-25-2018
+ */
+
+
 class IndexTest {
 
+	//Attributes
 	private Index index;
-	
-	
-	private IndexTest() {
-		
-	}
-	
-	
+
+	/**
+	 * Instance of index
+	 */
 	private void escenario1() {
 		index = new Index();
 	}
-	
+	/**
+	 * Register three users 
+	 * @throws NicknameNotValid: shouln't throw it
+	 * @throws UserAlreadyExists : shouln't throw it 
+	 */
 	private void escenario2() throws NicknameNotValid, UserAlreadyExists {
 		escenario1();
 		index.registrerUser("Seeebb");
@@ -39,21 +48,34 @@ class IndexTest {
 		index.registrerUser("Wandaaa");
 	}
 	
-	
+	/**
+	 * Set HeadCharacter null
+	 */
 	private void escenario3() {
 		escenario1();
 		index.setHeadCharacter(null);
 	}
 	
+	
+	/**
+	 * Set HeadField null
+	 */
 	private void escenario4() {
 		escenario1();
 		index.setHeadField(null);
 	}
+	
+	/**
+	 * Set Users null
+	 */
 	private void escenario5() {
 		escenario1();
 		index.setUsers(null);
 	}
 	
+	/**
+	 * It clear existing users and add three new ones
+	 */
 	private void escenario6() {
 		escenario1();
 		index.getUsers().clear();
@@ -66,15 +88,21 @@ class IndexTest {
 	}
 	
 	@Test
-	void testIndex() {
+	/**
+	 * Proves if one object in the constructor is created
+	 */
+	public void testIndex() {
 		escenario1();
 		assertNotNull(index.getHeadCharacter());
 	}
 
 	@Test
-	void testRegistrerUserNotException() {
-		escenario1();
-		String newName = "Sebb";
+	/**
+	 * Proves the register method given a valid user name 
+	 */
+	public void testRegistrerUserNotException() {
+		escenario6();
+		String newName = "Seebb";
 		
 		try {
 			index.registrerUser(newName);
@@ -87,8 +115,11 @@ class IndexTest {
 	}
 	
 	@Test
-	void testRegistrerUserAlreadyExistException() {
-		escenario1();
+	/**
+	 * Proves the register method given a existent user name
+	 */
+	public void testRegistrerUserAlreadyExistException() {
+		escenario6();
 		String newName = "Camilo";
 		
 		try {
@@ -102,8 +133,11 @@ class IndexTest {
 	}
 	
 	@Test
-	void testRegistrerUserException() {
-		escenario1();
+	/**
+	 * Proves the register method given a invalid user name
+	 */
+	public void testRegistrerUserException() {
+		escenario6();
 		String newName = "Se";
 		
 		try {
@@ -117,7 +151,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testOrdenarUserName() {
+	/**
+	 * Proves that the method sort the user by name
+	 */
+	public void testOrdenarUserName() {
 		try {
 			escenario2();
 		} catch (NicknameNotValid e) {
@@ -130,7 +167,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testWriteUsers() {
+	/**
+	 * Proves that the method concatenate all the users
+	 */
+	public void testWriteUsers() {
 		escenario6();
 		String expected = "Camilo" + "\t" +"0" +","+ 
 		"Sebb"+"\t"+"0"+","+
@@ -142,7 +182,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testLoadCharacters() {
+	/**
+	 * It should load the characters, head character shouldn't be null 
+	 */
+	public void testLoadCharacters() {
 		escenario3();
 		index.loadCharacters();
 		assertNotNull(index.getHeadCharacter());
@@ -150,7 +193,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testLoadFields() {
+	/**
+	 * It should load the fields, head field shouldn't be null 
+	 */
+	public void testLoadFields() {
 		escenario4();
 		index.loadFields();
 		assertNotNull(index.getHeadField());
@@ -158,7 +204,10 @@ class IndexTest {
 
 
 	@Test
-	void testSaveCharactersAtHead() {
+	/**
+	 * It should save the given character, at the list head 
+	 */
+	public void testSaveCharactersAtHead() {
 		escenario1();
 		Character character = new Character(0,0,"Zoo","/images/Zoo.png");
 		index.saveCharacters(character, index.getHeadCharacter(),null);
@@ -166,7 +215,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testSaveCharacterAtMiddle() {
+	/**
+	 * It should save the given character, at the list middle 
+	 */
+	public void testSaveCharacterAtMiddle() {
 		escenario1();
 		Character character = new Character(10, 10,"Loki","/images/loki.png");
 		index.saveCharacters(character, index.getHeadCharacter(), null);
@@ -179,7 +231,10 @@ class IndexTest {
 	
 	
 	@Test
-	void testSaveCharacterAtEnd() {
+	/**
+	 * It should save the given character, at the list end 
+	 */
+	public void testSaveCharacterAtEnd() {
 		escenario1();
 		Character character = new Character(10, 10,"Aaron","/images/Aaron.png");
 		index.saveCharacters(character, index.getHeadCharacter(), null);
@@ -191,7 +246,10 @@ class IndexTest {
 	}
 	
 	@Test
-	void testCircularListCharacter() {
+	/**
+	 * It should convert the actual list onto a circular list
+	 */
+	public void testCircularListCharacter() {
 		escenario1();
 		if(index.getCharacterChoose().getPrevious()!=null) {
 			assert(true);
@@ -201,7 +259,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testCircularListField() {
+	/**
+	 * It should convert the actual list onto a circular list
+	 */
+	public void testCircularListField() {
 		escenario1();
 		if(index.getFieldChoose().getPrevious()!=null) {
 			assert(true);
@@ -211,16 +272,22 @@ class IndexTest {
 	}
 	
 	@Test
-	void testChoosenUser() {
+	/**
+	 * It should test if the user choose attribute isn't null
+	 */
+	public void testChoosenUser() {
 		escenario1();
 		String data = "Sebb" + "\t" + "12";
 		index.choosenUser(data);
-		assertNotNull(index.getCharacterChoose());
+		assertNotNull(index.getUserChoose());
 
 	}
 
 	@Test
-	void testShowNextCharacter() {
+	/**
+	 * It should verify that the method show effectively the next character 
+	 */
+	public void testShowNextCharacter() {
 		escenario1();
 		Character temp = index.getCharacterChoose().getNext();
 		index.showNextCharacter();
@@ -228,7 +295,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testShowPreviousCharacter() {
+	/**
+	 * It should verify that the method show effectively the previous character 
+	 */
+	public void testShowPreviousCharacter() {
 		escenario1();
 		Character temp = index.getCharacterChoose().getPrevious();
 		index.showPreviousCharacter();
@@ -236,7 +306,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testShowNextField() {
+	/**
+	 * It should verify that the method show effectively the next field 
+	 */
+	public void testShowNextField() {
 		escenario1();
 		Field temp = index.getFieldChoose().getNext();
 		index.showNextField();
@@ -244,7 +317,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testShowPreviousField() {
+	/**
+	 * It should verify that the method show effectively the previous field 
+	 */
+	public void testShowPreviousField() {
 		escenario1();
 		Field temp = index.getFieldChoose().getPrevious();
 		index.showPreviousField();
@@ -252,7 +328,11 @@ class IndexTest {
 	}
 
 	@Test
-	void testElectedCharacterNotException() {
+	/**
+	 * The method verify if the character has been elected
+	 * Given a true parameter it shouldn't throw exception  
+	 */
+	public void testElectedCharacterNotException() {
 		escenario1();
 		boolean elected = true;
 		try {
@@ -265,7 +345,11 @@ class IndexTest {
 	}
 	
 	@Test
-	void testElectedCharacterException() {
+	/**
+	 * The method verify if the character has been elected
+	 * Given a false parameter it should throw exception  
+	 */
+	public void testElectedCharacterException() {
 		escenario1();
 		boolean elected = false;
 		try {
@@ -277,7 +361,11 @@ class IndexTest {
 	}
 
 	@Test
-	void testElectedFieldNotException() {
+	/**
+	 * It verify if the field has been elected
+	 * Given a true parameter the method shouldn't throw exception  
+	 */
+	public void testElectedFieldNotException() {
 		escenario1();
 		boolean elected = true;
 		try {
@@ -289,7 +377,11 @@ class IndexTest {
 	}
 	
 	@Test
-	void testElectedFieldException() {
+	/**
+	 * It verify if the field has been elected
+	 * Given a false parameter the method should throw exception  
+	 */
+	public void testElectedFieldException() {
 		escenario1();
 		boolean elected = false;
 		try {
@@ -302,7 +394,11 @@ class IndexTest {
 	
 	
 	@Test
-	void testSearchCharacterExistent() {
+	/**
+	 * It verify if the character to search is existent
+	 * Given character as a parameter the method shouldn't throw exception
+	 */
+	public void testSearchCharacterExistent() {
 		escenario1();
 		String name = "Thor";
 		try {
@@ -315,7 +411,11 @@ class IndexTest {
 	}
 	
 	@Test
-	void testSearchCharacterNotExistent() {
+	/**
+	 * It verify if the character to search is existent
+	 * Given character as a parameter the method should throw exception
+	 */
+	public void testSearchCharacterNotExistent() {
 		escenario1();
 		String name = "Tho";
 		try {
@@ -327,8 +427,12 @@ class IndexTest {
 	}
 	
 	@Test
-	void testSearchUserExistent() {
-		escenario1();
+	/**
+	 * It verify if the user to search is existent
+	 * Given user as a parameter the method shouldn't throw exception
+	 */
+	public void testSearchUserExistent() {
+		escenario6();
 		String nickName = "Camilo";
 		try {
 			User user = index.searchUser(nickName);
@@ -341,7 +445,11 @@ class IndexTest {
 	
 	
 	@Test
-	void testSearchUserNotExistent() {
+	/**
+	 * It verify if the user to search is existent
+	 * Given user as a parameter the method should throw exception
+	 */
+	public void testSearchUserNotExistent() {
 		escenario1();
 		String nickName = "C";
 		try {
@@ -353,7 +461,10 @@ class IndexTest {
 	}
 	
 	@Test
-	void testSaveFieldAtHead() {
+	/**
+	 * It validate if the given field has been saved at list head
+	 */
+	public void testSaveFieldAtHead() {
 		escenario1();
 		Field field = new Field("Zoo","/images/zoo.png");
 		index.saveField(field,index.getHeadField(),null);
@@ -361,15 +472,23 @@ class IndexTest {
 	}
 	
 	@Test
-	void testSaveFieldAtMiddle() {
+	/**
+	 * It validate if the given field has been saved at list middle
+	 */
+	public void testSaveFieldAtMiddle() {
 		escenario1();
 		Field field = new Field("Loo","/images/loo.png");
 		index.saveField(field,index.getHeadField(),null);
 		//assertEquals(field,);
 		fail("Not yet implemented");
 	}
+	
+	
 	@Test
-	void testSaveFieldAtEnd() {
+	/**
+	 * It validate if the given field has been saved at list end
+	 */
+	public void testSaveFieldAtEnd() {
 		escenario1();
 		Field field = new Field("Loo","/images/loo.png");
 		index.saveField(field,index.getHeadField(),null);
@@ -380,7 +499,10 @@ class IndexTest {
 	
 
 	@Test
-	void testSerializarUsers() {
+	/**
+	 * It validate if the users have been serialized
+	 */
+	public void testSerializarUsers() {
 		escenario1();
 		try {
 			index.serializarUsers();
@@ -392,7 +514,10 @@ class IndexTest {
 	}
 
 	@Test
-	void testRecuperarUsers() {
+	/**
+	 *It validate if the users have been loaded successfully 
+	 */
+	public void testRecuperarUsers() {
 		escenario5();
 		assertNotNull(index.recuperarUsers());
 	}

@@ -149,9 +149,18 @@ public class Field implements Comparable<Field>{
 	public ArrayList<Gemma> showList( ){
 		
 		ArrayList<Gemma> out = new ArrayList<>();
-        rootGemma.showInList(out);    
+        if(rootGemma!=null)
+		rootGemma.showInList(out);    
             return out;  
     }
+	
+	public Gemma searchGemma(int power) {
+		if(this.rootGemma == null) {
+			return null;
+		}else {
+			return rootGemma.searchGemma(power);
+		}
+	}
 	
 //	public Field searchField(String id) {
 //		Field toReturn = null;

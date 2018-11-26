@@ -144,8 +144,7 @@ public class FieldController implements Initializable{
 				if(vivo) {
 					catchGemma();
 				}else {
-					thread.stop();
-					ch.stop();
+					//lose();
 				}
 				if(win) {
 					win();
@@ -162,7 +161,6 @@ public class FieldController implements Initializable{
 				catchTrap();
 			}else {
 				lose();
-				trapsThread.stop();
 			}
 			if(win) {
 				trapsThread.stop();
@@ -175,6 +173,10 @@ public class FieldController implements Initializable{
 	}
 	
 	private void lose() {
+		trapsThread.stop();
+		thread.stop();
+		timer.stop();
+		ch.stop();
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setHeaderText(null);
 		alert.setContentText("YOU LOSE YOUR SCORE WAS: 0");
